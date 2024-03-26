@@ -433,19 +433,20 @@ public class RobotContainer {
                     new AmpElevatorRetract(s_Elevator)
                 )
         );
-        //source intake 1
+        //source intake 1: shooter pivot will flip and the note will go in on the intake side.
         operatorY.onTrue(
             new ParallelCommandGroup(
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition()),
-                new InstantCommand(() -> s_ShooterPivot.Set),
-            )
+                new InstantCommand(() -> s_Elevator.SetElevatorPosition(/*TODO height of elevator for source intake 1 */)),
+                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(/*TODO pivot position for source intake 1 */)),
+                new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage))    
+                )
         );
-        //source intake 2
+        //source intake 2: note will come in through the shooter side.
         operatorB.onTrue(
             new ParallelCommandGroup(
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition()),
-                new InstantCommand(() -> s_ShooterPivot.Set), 
-                new InstantCommand(() -> )         
+                new InstantCommand(() -> s_Elevator.SetElevatorPosition(/*TODO height of elevator for source intake 2 */)),
+                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(/*TODO pivot position for source intake 2 */)), 
+                new InstantCommand(() -> s_Shooter.setShooterVoltage(/*TODO value to make wheels go oppisite way*/),)//wheels will spin the oppisite way         
             )
         );
         
