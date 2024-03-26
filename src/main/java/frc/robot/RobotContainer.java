@@ -433,10 +433,19 @@ public class RobotContainer {
                     new AmpElevatorRetract(s_Elevator)
                 )
         );
+        //source intake 1
         operatorY.onTrue(
             new ParallelCommandGroup(
                 new InstantCommand(() -> s_Elevator.SetElevatorPosition()),
                 new InstantCommand(() -> s_ShooterPivot.Set),
+            )
+        );
+        //source intake 2
+        operatorB.onTrue(
+            new ParallelCommandGroup(
+                new InstantCommand(() -> s_Elevator.SetElevatorPosition()),
+                new InstantCommand(() -> s_ShooterPivot.Set), 
+                new InstantCommand(() -> )         
             )
         );
         
