@@ -234,8 +234,7 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
 
-        //Manual climb
-        operatorLB.onTrue(new InstantCommand(() -> s_Elevator.climb()));
+        
         // zero gyro
         driverY.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
@@ -413,6 +412,8 @@ public class RobotContainer {
 
         /* Operator Buttons */
         
+        //Manual climb
+        operatorLB.onTrue(new InstantCommand(() -> s_Elevator.climb()));
         // aim amp
         
         operatorLeftTrigger.whileTrue(
@@ -432,7 +433,12 @@ public class RobotContainer {
                     new AmpElevatorRetract(s_Elevator)
                 )
         );
-
+        operatorY.onTrue(
+            new ParallelCommandGroup(
+                new InstantCommand(() -> s_Elevator.SetElevatorPosition()),
+                new InstantCommand(() -> s_ShooterPivot.Set),
+            )
+        );
         
         operatorRightTrigger.onTrue(
              new ParallelCommandGroup(
