@@ -407,13 +407,13 @@ public class RobotContainer {
             )
 
         );
-        
+          //Manual climb
+        driverDpadDown.onTrue(new InstantCommand(() -> s_Elevator.climb()));
 
 
         /* Operator Buttons */
         
-        //Manual climb
-        operatorLB.onTrue(new InstantCommand(() -> s_Elevator.climb()));
+      
         // aim amp
         
         operatorLeftTrigger.whileTrue(
