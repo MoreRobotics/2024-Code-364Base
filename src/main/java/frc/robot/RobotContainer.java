@@ -434,19 +434,31 @@ public class RobotContainer {
                 )
         );
         //source intake 1: shooter pivot will flip and the note will go in on the intake side.
-        operatorY.onTrue(
+        //TODO: debug
+        operatorY.whileTrue(
+
+            new SequentialCommandGroup(
+                new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
+                new InstantCommand(() -> s_Elevator.SetElevatorPosition(8.85)),
+                s_Elevator.ElevatorAtPosition(),
+                
+                new ParallelCommandGroup(
+                    new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(325)),
+                    new RunLoader(s_Shooter).until(() -> !s_Shooter.getBreakBeamOutput())
+            .andThen(new ParallelCommandGroup(
+                new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1))
+            )))) 
+                
+        ).onFalse(
             new ParallelCommandGroup(
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition(/*TODO height of elevator for source intake 1 */)),
-                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(/*TODO pivot position for source intake 1 */)),
-                new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage))    
+                new ParallelCommandGroup(
+                    new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 0))
+                ),
+                new SequentialCommandGroup(
+                    new AmpShooterPivotRetract(s_ShooterPivot),
+                        s_ShooterPivot.ShooterPivotAtPosition(),
+                        new AmpElevatorRetract(s_Elevator)
                 )
-        );
-        //source intake 2: note will come in through the shooter side.
-        operatorB.onTrue(
-            new ParallelCommandGroup(
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition(/*TODO height of elevator for source intake 2 */)),
-                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(/*TODO pivot position for source intake 2 */)), 
-                new InstantCommand(() -> s_Shooter.setShooterVoltage(/*TODO value to make wheels go oppisite way*/),)//wheels will spin the oppisite way         
             )
         );
         
