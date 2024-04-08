@@ -433,8 +433,7 @@ public class RobotContainer {
                     new AmpElevatorRetract(s_Elevator)
                 )
         );
-        //source intake 1: shooter pivot will flip and the note will go in on the intake side.
-        //TODO: debug
+        //source intake
         operatorY.whileTrue(
 
             new SequentialCommandGroup(
