@@ -6,6 +6,7 @@ import frc.robot.subsystems.ShooterPivot;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Eyes;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Elevator;
 
 
 public class RunIntake extends Command {
@@ -15,6 +16,7 @@ public class RunIntake extends Command {
     ShooterPivot s_ShooterPivot;
     Shooter s_Shooter;
     Eyes s_Eyes;
+    Elevator s_Elevator;
 
     // required WPILib class objects
 
@@ -25,14 +27,16 @@ public class RunIntake extends Command {
 
 
     // constructor
-    public RunIntake(Intake s_Intake, ShooterPivot s_ShooterPivot, Shooter s_Shooter, Eyes s_Eyes) {
+    public RunIntake(Intake s_Intake, ShooterPivot s_ShooterPivot, Shooter s_Shooter, Eyes s_Eyes, 
+    Elevator s_Elevator) {
 
         this.s_Intake = s_Intake;
         this.s_ShooterPivot = s_ShooterPivot;
         this.s_Shooter = s_Shooter;
         this.s_Eyes = s_Eyes;
+        this.s_Elevator = s_Elevator;
 
-        addRequirements(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes);
+        addRequirements(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes, s_Elevator);
 
 
     }
@@ -42,6 +46,7 @@ public class RunIntake extends Command {
 
         s_Intake.setIntakePivotPosition(s_Intake.intakeGroundPosition);
         s_Intake.setIntakeVoltage(s_Intake.runIntakeVoltage);
+        s_Elevator.SetElevatorPosition(0);
         s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotIntakePosition);
         s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage);
         

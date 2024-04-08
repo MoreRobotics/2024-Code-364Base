@@ -294,6 +294,9 @@ public class Swerve extends SubsystemBase {
         SmartDashboard.putNumber("ChassisSpeedX", getChassisSpeed().vxMetersPerSecond);
         SmartDashboard.putNumber("ChassisSpeedY", getChassisSpeed().vyMetersPerSecond);
         SmartDashboard.putNumber("ChassisSpeedOmega", getChassisSpeed().omegaRadiansPerSecond);
+        SmartDashboard.putNumber("debug/ChassisSpeedX", getChassisSpeed().vxMetersPerSecond);
+        SmartDashboard.putNumber("debug/ChassisSpeedY", getChassisSpeed().vyMetersPerSecond);
+        SmartDashboard.putNumber("debug/ChassisSpeedOmega", getChassisSpeed().omegaRadiansPerSecond);
 
 
 
@@ -303,9 +306,18 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
 
+        for(SwerveModule mod : mSwerveMods){
+            SmartDashboard.putNumber("debug/Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
+            SmartDashboard.putNumber("debug/Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
+            SmartDashboard.putNumber("debug/Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+        }
+
         SmartDashboard.putNumber("Robot X", swerveOdometry.getPoseMeters().getX());
         SmartDashboard.putNumber("Robot Y", swerveOdometry.getPoseMeters().getY());
         SmartDashboard.putNumber("gyro angle", getGyroYaw().getDegrees());
+        SmartDashboard.putNumber("debug/Robot X", swerveOdometry.getPoseMeters().getX());
+        SmartDashboard.putNumber("debug/Robot Y", swerveOdometry.getPoseMeters().getY());
+        SmartDashboard.putNumber("debug/gyro angle", getGyroYaw().getDegrees());
 
 
 

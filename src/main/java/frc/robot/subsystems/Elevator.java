@@ -252,6 +252,10 @@ if (m_elevator1.getEncoder().getPosition() == shootingPosition){
         SmartDashboard.putNumber("Elevator Encoder Value: ", getPosition());
         SmartDashboard.putNumber("Current Elevator Position",e_Elevator.getPosition());
         SmartDashboard.putNumber("Elevator Voltage", voltage);
+        SmartDashboard.putNumber("debug/ELEVATOR TARGET POSITION", targetElevatorPosition);
+        SmartDashboard.putNumber("debug/Elevator Encoder Value: ", getPosition());
+        SmartDashboard.putNumber("debug/Current Elevator Position",e_Elevator.getPosition());
+        SmartDashboard.putNumber("debug/Elevator Voltage", voltage);
         
        // logData();
       

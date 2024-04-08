@@ -247,5 +247,12 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putBoolean("driver/Break Beam Sensor", getBreakBeamOutput());
     SmartDashboard.putNumber("Right Shooter Current", m_rightShooter.getSupplyCurrent().getValueAsDouble());
     SmartDashboard.putNumber("Left Shooter Current", m_leftShooter.getSupplyCurrent().getValueAsDouble());
+    SmartDashboard.putNumber("debug/Right Shooter Speed", m_rightShooter.getVelocity().getValueAsDouble());
+    SmartDashboard.putNumber("debug/Left Shooter Speed", m_leftShooter.getVelocity().getValueAsDouble());
+    SmartDashboard.putNumber("debug/Right Shooter Temp", m_rightShooter.getDeviceTemp().getValueAsDouble());
+    SmartDashboard.putNumber("debug/Left Shooter Temp", m_leftShooter.getDeviceTemp().getValueAsDouble());
+    SmartDashboard.putBoolean("debug/Break Beam Sensor", getBreakBeamOutput());
+    SmartDashboard.putNumber("debug/Right Shooter Current", m_rightShooter.getSupplyCurrent().getValueAsDouble());
+    SmartDashboard.putNumber("debug/Left Shooter Current", m_leftShooter.getSupplyCurrent().getValueAsDouble());
   }
 }

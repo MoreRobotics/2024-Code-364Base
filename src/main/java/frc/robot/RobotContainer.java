@@ -200,10 +200,10 @@ public class RobotContainer {
                 new WaitCommand(1.0))
                 );
 
-        NamedCommands.registerCommand("Intake", new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes)
+        NamedCommands.registerCommand("Intake", new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes, s_Elevator)
             .until(() -> !s_Shooter.getBreakBeamOutput())
         );
-        NamedCommands.registerCommand("Confirm Intake", new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes)
+        NamedCommands.registerCommand("Confirm Intake", new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes, s_Elevator)
             .until(() -> !s_Shooter.getBreakBeamOutput())
             .withTimeout(2)
         );
@@ -334,7 +334,7 @@ public class RobotContainer {
 
         // intake
         driverX.whileTrue(
-            new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes)
+            new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes, s_Elevator)
             .until(() -> !s_Shooter.getBreakBeamOutput())
             .andThen(new ParallelCommandGroup(
                 new InstantCommand(() -> s_Eyes.limelight.setLEDMode_ForceBlink("")),

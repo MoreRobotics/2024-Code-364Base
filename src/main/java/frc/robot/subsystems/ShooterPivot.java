@@ -145,5 +145,8 @@ public class ShooterPivot extends SubsystemBase {
     SmartDashboard.putNumber("Shooter CANcoder", cancoderInDegrees());
     SmartDashboard.putNumber("Shooter Pivot Motor Position", e_ShooterPivotIntegrated.getPosition());
     SmartDashboard.putNumber("Shooter setpoint", m_setPoint);
+    SmartDashboard.putNumber("debug/Shooter Pivot Voltage", m_ShooterPivotVoltage);
+    SmartDashboard.putNumber("debug/Shooter Pivot Motor Position", e_ShooterPivotIntegrated.getPosition());
+    SmartDashboard.putNumber("debug/Shooter setpoint", m_setPoint);
   }
 }

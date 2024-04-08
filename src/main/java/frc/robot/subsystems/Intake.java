@@ -150,5 +150,10 @@ public class Intake extends SubsystemBase {
     SmartDashboard.putNumber("Intake Pivot Motor Position", e_intakePivotIntegrated.getPosition());
     SmartDashboard.putNumber("Intake setpoint", m_setPoint);
     SmartDashboard.putNumber("Intake Current", m_Intake.getOutputCurrent());
+    SmartDashboard.putNumber("debug/Intake Voltage", intakePivotVoltage);
+    SmartDashboard.putNumber("debug/Intake CANcoder", cancoderInDegrees());
+    SmartDashboard.putNumber("debug/Intake Pivot Motor Position", e_intakePivotIntegrated.getPosition());
+    SmartDashboard.putNumber("debug/Intake setpoint", m_setPoint);
+    SmartDashboard.putNumber("debug/Intake Current", m_Intake.getOutputCurrent());
    }
 }
