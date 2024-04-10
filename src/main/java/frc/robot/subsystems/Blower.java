@@ -1,14 +1,11 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
+
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-public class TemplateSubsystem extends SubsystemBase {
+public class Blower extends SubsystemBase {
   /* Instance Variables
    * This section should contain any variables that need to 
    * be accessed by your entire subsystem/class. This usually includes any phyical motors or sensors that are a part of your subsystem,
@@ -33,7 +30,7 @@ public class TemplateSubsystem extends SubsystemBase {
    * instance variables created above in this method. You can
    * also do anything else that you want to happen right away.
    */
-  public TemplateSubsystem() {
+  public Blower() {
     /* These are variable initializations, where a variable 
      * is given a value. In this case, the `new` keyword is 
      * used to create a new CANSparkMax object and give it 
