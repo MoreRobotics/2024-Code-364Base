@@ -36,7 +36,7 @@ public class Blower extends SubsystemBase {
      * used to create a new CANSparkMax object and give it 
      * to `motor` as it's value. 
      */
-    motor = new CANSparkMax(0, MotorType.kBrushless);
+    motor = new CANSparkMax(0, MotorType.kBrushed);
     internalData = 0.4;
   }
 
@@ -63,6 +63,14 @@ public class Blower extends SubsystemBase {
    */
   public void doSomething(double number) {
     internalData = internalData * number;
+  }
+
+  public void runBlower() {
+    motor.setVoltage(internalData);
+  }
+
+  public void stopBlower() {
+    motor.setVoltage(0);
   }
 
   /* The below method is included in every Subsystem. You can
