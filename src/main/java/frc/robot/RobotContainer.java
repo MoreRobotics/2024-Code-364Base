@@ -31,6 +31,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -432,7 +433,7 @@ public class RobotContainer {
         );
 
         // generate and run path to closest trap
-        driverStart.whileTrue(new ConditionalCommand(s_Eyes.onTheFly(), new InstantCommand(), () -> s_Eyes.closeToTrap))
+        driverStart.whileTrue(new ConditionalCommand(new InstantCommand(() -> s_Swerve.onTheFly(s_Eyes.closestTrapPath())), new InstantCommand(), () -> s_Eyes.closeToTrap)) //TODO Test this, was only running on init earlier
         .onFalse(s_Swerve.getDefaultCommand()); //TODO let driver know we are in position to trap via rumble
 
         //Feed
