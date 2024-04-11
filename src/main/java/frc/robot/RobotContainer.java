@@ -433,7 +433,7 @@ public class RobotContainer {
         );
 
         // generate and run path to closest trap
-        driverStart.whileTrue(new ConditionalCommand(new InstantCommand(() -> s_Swerve.onTheFly(s_Eyes.closestTrapPath())), new InstantCommand(), () -> s_Eyes.closeToTrap)) //TODO Test this, was only running on init earlier
+        driverStart.whileTrue(new ConditionalCommand(new InstantCommand(() -> s_Swerve.onTheFly(s_Eyes.closestTrapPath())), new InstantCommand(), () -> s_Eyes.closeToTrap)) //TODO Test this, was only running on init earlier, may need to be run command
         .onFalse(s_Swerve.getDefaultCommand()); //TODO let driver know we are in position to trap via rumble
 
         //Feed
