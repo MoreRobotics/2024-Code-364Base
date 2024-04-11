@@ -197,7 +197,7 @@ public final class Constants {
         public static final double ampRedY = 8.0;
         public static final double ampRedR = 270;
 
-        public static final double distanceLimit = 3.0;
+        public static final double distanceLimit = 100.0;
 
         // blue trap positions
         public static final double blueTrapLeftX = 4.3;

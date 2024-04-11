@@ -17,9 +17,13 @@ import frc.lib.util.FieldRelativeSpeed;
 import frc.robot.Constants;
 import java.util.List;
 
+import com.pathplanner.lib.commands.FollowPathHolonomic;
 import com.pathplanner.lib.path.GoalEndState;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -511,7 +515,7 @@ public class Eyes extends SubsystemBase {
     public PathPlannerPath closestTrapPath() {
 
         Pose2d closestTrap = getClosestTrap();
-        Pose2d currentPose = getRobotPose();
+        Pose2d currentPose = s_Swerve.m_poseEstimator.getEstimatedPosition();
  
         //The bezierFromPoses method required that the rotation component of each pose is the direction of travel, not the rotation of a swerve chassis.  To set the rotation the path should end with, use the GoalEndState.
         
@@ -533,6 +537,36 @@ public class Eyes extends SubsystemBase {
 
         return path;
     }
+
+    public Command onTheFly() {
+        PathPlannerPath path = closestTrapPath();
+        return new FollowPathHolonomic(
+                path,
+                () -> s_Swerve.getPose(), // Robot pose supplier
+                () -> s_Swerve.getChassisSpeed(), // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+                (speeds) -> s_Swerve.setChassisSpeed(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+                new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
+                        new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                        new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                        Constants.Swerve.maxSpeed, // Max module speed, in m/s
+                        0.4, // Drive base radius in meters. Distance from robot center to furthest module.
+                        new ReplanningConfig() // Default path replanning config. See the API for the options here
+                ),
+                () -> {
+                  // Boolean supplier that controls when the path will be mirrored for the red alliance
+                  // This will flip the path being followed to the red side of the field.
+                  // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+    
+                  var alliance = DriverStation.getAlliance();
+                  if (alliance.isPresent()) {
+                    return alliance.get() == DriverStation.Alliance.Red;
+                  }
+                  return false;
+                },
+                s_Swerve // Reference to this subsystem to set requirements
+        );
+      }
+
 
 
     public void updatePoseEstimatorWithVisionBotPose() {
