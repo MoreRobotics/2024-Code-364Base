@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 8.241041962510971,
-        "y": 2.4150717815077387
+        "y": 2.4440782784662045
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.14733053902644,
-        "y": 3.40836743357947
+        "x": 8.23517407718576,
+        "y": 2.8884561472826653
       },
       "isLocked": false,
       "linkedName": "Sourceside Auto path 3 Endpoint"
@@ -20,8 +20,8 @@
         "y": 4.119255498297474
       },
       "prevControl": {
-        "x": 6.770574869738114,
-        "y": 3.8368479109437468
+        "x": 8.25856238607064,
+        "y": 3.2392807805558634
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,9 +30,9 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.4,
-      "rotationDegrees": 25.624492662715717,
-      "rotateFast": false
+      "waypointRelativePos": 0.0,
+      "rotationDegrees": 90.0,
+      "rotateFast": true
     }
   ],
   "constraintZones": [],
@@ -56,20 +56,20 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.57,
+    "maxVelocity": 4.5,
     "maxAcceleration": 4.0,
-    "maxAngularVelocity": 540.0,
+    "maxAngularVelocity": 700.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 20.28255908891649,
+    "rotation": 90.67246599163494,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "Source Side",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 87.76461147672893,
     "velocity": 0
   },
   "useDefaultConstraints": false

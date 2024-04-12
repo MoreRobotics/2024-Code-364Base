@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.157095812938493,
-        "y": 4.156084903648504
+        "x": 8.31703315828284,
+        "y": 4.128036518181299
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.770433195004229,
-        "y": 2.9113169003249295
+        "x": 5.930370540348576,
+        "y": 2.8832685148577237
       },
       "isLocked": false,
       "linkedName": "Ampside Auto Path 7 Endpoint"

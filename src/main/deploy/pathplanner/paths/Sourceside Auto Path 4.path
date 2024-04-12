@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 8.241041962510971,
-        "y": 2.4150717815077387
+        "y": 2.4440782784662045
       },
       "prevControl": null,
       "nextControl": {
         "x": 6.517381860386496,
-        "y": -0.01947638533473953
+        "y": 0.0095301116237263
       },
       "isLocked": false,
       "linkedName": "Sourceside Auto path 3 Endpoint"
