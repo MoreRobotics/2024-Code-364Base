@@ -43,17 +43,17 @@ public class Shooter extends SubsystemBase {
 
 
   // left shooter motor PID
-  private final double lShooterMotorPGains = 0.05;
+  private final double lShooterMotorPGains = 0.2;
   private final double lShooterMotorIGains = 0.0;
   private final double lShooterMotorDGains = 0.0;
   private final double lShooterMotorSGains = 0.0;
   private final double lShooterMotorVGains = 0.12;
 
   // right shooter motor PID
-  private final double rShooterMotorPGains = 0.05;
+  private final double rShooterMotorPGains = 0.2;
   private final double rShooterMotorIGains = 0.0;
   private final double rShooterMotorDGains = 0.0;
-  private final int m_CurrentLimit = 40;
+  private final int m_LoaderCurrentLimit = 40;
   
   private final double rShooterMotorSGains = 0.0;
   private final double rShooterMotorVGains = 0.12;
@@ -89,7 +89,7 @@ public class Shooter extends SubsystemBase {
     configF.apply(
       new CurrentLimitsConfigs()
       .withSupplyCurrentLimitEnable(true)
-      .withSupplyCurrentLimit(m_CurrentLimit)
+      .withSupplyCurrentLimit(m_LoaderCurrentLimit)
     );
 
     // right shooter motor configuration
@@ -241,6 +241,8 @@ public class Shooter extends SubsystemBase {
     // log shooting data
     SmartDashboard.putNumber("Right Shooter Speed", m_rightShooter.getVelocity().getValueAsDouble());
     SmartDashboard.putNumber("Left Shooter Speed", m_leftShooter.getVelocity().getValueAsDouble());
+    SmartDashboard.putNumber("Right Shooter Voltage", m_rightShooter.getMotorVoltage().getValue());
+    SmartDashboard.putNumber("Left Shooter Voltage", m_leftShooter.getMotorVoltage().getValue());
     SmartDashboard.putNumber("Right Shooter Temp", m_rightShooter.getDeviceTemp().getValueAsDouble());
     SmartDashboard.putNumber("Left Shooter Temp", m_leftShooter.getDeviceTemp().getValueAsDouble());
     SmartDashboard.putBoolean("Break Beam Sensor", getBreakBeamOutput());
@@ -254,5 +256,8 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putBoolean("debug/Break Beam Sensor", getBreakBeamOutput());
     SmartDashboard.putNumber("debug/Right Shooter Current", m_rightShooter.getSupplyCurrent().getValueAsDouble());
     SmartDashboard.putNumber("debug/Left Shooter Current", m_leftShooter.getSupplyCurrent().getValueAsDouble());
+    SmartDashboard.putNumber("Right Shooter Stator Current", m_rightShooter.getStatorCurrent().getValueAsDouble());
+    SmartDashboard.putNumber("Left Shooter Stator Current", m_leftShooter.getStatorCurrent().getValueAsDouble());
+
   }
 }
