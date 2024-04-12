@@ -511,6 +511,23 @@ public class Eyes extends SubsystemBase {
         return closestTrap;
     }
 
+    public boolean atTrap() {
+
+        double trapTranslationTolerance = 3.0;
+        double trapRotationTolerance = 1.0;
+
+        double xError = Math.abs(getRobotPose().getX() - getClosestTrap().getX());
+        double yError = Math.abs(getRobotPose().getY() - getClosestTrap().getY());
+        double rError = Math.abs(getRobotPose().getRotation().getDegrees() - getClosestTrap().getRotation().getDegrees());
+
+        if (trapTranslationTolerance >= xError && trapTranslationTolerance >= yError && trapRotationTolerance >= rError) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 
     public PathPlannerPath closestTrapPath() {
 
