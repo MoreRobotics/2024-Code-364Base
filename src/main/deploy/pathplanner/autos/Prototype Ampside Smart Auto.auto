@@ -32,77 +32,19 @@
         {
           "type": "named",
           "data": {
-            "name": "Check Note"
+            "name": "AutoScore"
           }
         },
         {
-          "type": "race",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "AutoScore"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Ampside Auto path 3"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Confirm Intake"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Got Note"
-                }
-              }
-            ]
+            "pathName": "Ampside Missed Note 1"
           }
         },
         {
-          "type": "race",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Ampside Missed Note 1"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Confirm Intake"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Not Got Note"
-                }
-              }
-            ]
+            "name": "Confirm Intake"
           }
         },
         {

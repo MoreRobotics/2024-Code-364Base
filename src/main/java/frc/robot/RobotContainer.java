@@ -178,7 +178,7 @@ public class RobotContainer {
         //NOTE: IF REMOVED NEED TO ADD SHOOTER SPINUP FOR AMP SCORE
         s_Shooter.setDefaultCommand(
             new ConditionalCommand(
-                new InstantCommand (() -> s_Shooter.shootingMotorsSetControl(0, 0), s_Shooter), 
+                new InstantCommand (() -> s_Shooter.setShooterVoltage(0, 0), s_Shooter), 
                 new InstantCommand(() -> s_Shooter.shootingMotorsSetControl(35.0, 35.0), s_Shooter), //s_Shooter.shootingMotorsSetControl(20, 20)
                 () -> s_Shooter.getBreakBeamOutput())
         );
@@ -415,6 +415,9 @@ public class RobotContainer {
                 return true;
             }
         }));
+        //climb down more
+        driverDpadDown.onTrue(
+            new InstantCommand(() -> s_Elevator.SetElevatorPosition(0.0)));
 
         // abort climb
         driverSelect.onTrue(
@@ -462,7 +465,7 @@ public class RobotContainer {
                     () -> false,
                     rotationSpeed,
                     true
-                ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, true))
+                ).alongWith(new Shooting(s_ShooterPivot,s_Shooter, 65.0, 117.0))//new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, true))
             ).onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
         } else {
             driverRStick.whileTrue(new TeleopSwerve(
@@ -475,7 +478,7 @@ public class RobotContainer {
                     () -> false,
                     rotationSpeed,
                     true
-                ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 2.4)))
+                ).alongWith(new Shooting(s_ShooterPivot,s_Shooter, 65.0, 117.0)))
                 .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition))
 
 
@@ -538,6 +541,7 @@ public class RobotContainer {
              )
          );
         
+
         // dummy shoot commands
         operatorDpadDown.whileTrue(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 1.25))
             .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
@@ -545,6 +549,11 @@ public class RobotContainer {
             .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
         operatorDpadUp.whileTrue(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 3.17))
             .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
+        //prepare feed
+        operatorA.whileTrue(new PrepareFeed(s_Shooter, 65.0));
+        // prepare trap
+        operatorX.whileTrue(new Shooting(s_ShooterPivot, s_Shooter, 45.0, s_ShooterPivot.shooterPivotStowPosition));
+        
         
 
     }

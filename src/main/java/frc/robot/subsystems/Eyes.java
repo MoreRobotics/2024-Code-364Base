@@ -64,7 +64,7 @@ public class Eyes extends SubsystemBase {
     public double tID;
     private double accelerationCompensation = 0.0; //Note this caused a ton of jitter due to inconsistent loop times
     private StructPublisher<Pose2d> posePublisher;
-    // private StructPublisher<Pose2d> trapPathCurrentPosePub;
+     private StructPublisher<Pose2d> closestTrapPose;
     private StructPublisher<Translation2d> translationPublisher;
     private StructPublisher<Translation2d> trapPublisher;
     public boolean controllerRumble = false;
@@ -77,7 +77,7 @@ public class Eyes extends SubsystemBase {
         posePublisher = NetworkTableInstance.getDefault().getStructTopic("/Moving Goal pose", Pose2d.struct).publish();
         translationPublisher = NetworkTableInstance.getDefault().getStructTopic("/Moving Goal translation", Translation2d.struct).publish();
         trapPublisher = NetworkTableInstance.getDefault().getStructTopic("/Closest Trap", Translation2d.struct).publish();
-        // trapPathCurrentPosePub = NetworkTableInstance.getDefault().getStructTopic("/Trap Path Current Pose", Pose2d.struct).publish();
+        closestTrapPose = NetworkTableInstance.getDefault().getStructTopic("/Closest Trap Pose", Pose2d.struct).publish();
         s_Swerve = swerve;
         s_Shooter = shooter;
         trapPath = closestTrapPath();
@@ -513,6 +513,7 @@ public class Eyes extends SubsystemBase {
 
         //Log Target Trap Location
         trapPublisher.set(new Translation2d(closestTrap.getX(), closestTrap.getY()));
+        closestTrapPose.set(closestTrap);
 
         return closestTrap;
     }
@@ -551,7 +552,7 @@ public class Eyes extends SubsystemBase {
 
         PathPlannerPath path = new PathPlannerPath(
             bezierPoints,
-            new PathConstraints(0.25, 0.25, 2 * Math.PI, 4 * Math.PI), //TODO adjust speeds
+            new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI), //TODO adjust speeds
             new GoalEndState(0.0, closestTrap.getRotation())
         );
 

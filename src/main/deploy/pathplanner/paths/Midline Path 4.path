@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8227210138630805,
-        "y": 4.802904518089738
+        "x": 1.5119508293583617,
+        "y": 4.742499829009148
       },
       "isLocked": false,
       "linkedName": "Midline Path 3 Endpoint"
     },
     {
       "anchor": {
-        "x": 2.6513193714406413,
-        "y": 5.519297354384182
+        "x": 2.85582141745541,
+        "y": 5.62867536173981
       },
       "prevControl": {
-        "x": 1.5994007763753808,
-        "y": 5.392341661876307
+        "x": 1.5022126366909916,
+        "y": 5.356005967053452
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.2,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -47,28 +47,11 @@
           ]
         }
       }
-    },
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0.45,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Aim"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 5.57,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

@@ -202,15 +202,15 @@ public final class Constants {
         // blue trap positions
         public static final double blueTrapLeftX = 4.3;
         public static final double blueTrapLeftY = 5.0;
-        public static final double blueTrapLeftR = -60.0;
+        public static final double blueTrapLeftR = -60.0 + 180;
 
-        public static final double blueTrapRightX = 4.3;
-        public static final double blueTrapRightY = 3.0;
-        public static final double blueTrapRightR = 60.0;
+        public static final double blueTrapRightX = 4.25;
+        public static final double blueTrapRightY = 2.95;
+        public static final double blueTrapRightR = 60.0 + 180;
 
         public static final double blueTrapCenterX = 6.1;
         public static final double blueTrapCenterY = 4.1;
-        public static final double blueTrapCenterR = 180.0;
+        public static final double blueTrapCenterR = 180.0 + 180;
         
 
         // red trap positions
