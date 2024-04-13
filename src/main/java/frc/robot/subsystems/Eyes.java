@@ -18,6 +18,8 @@ import frc.robot.Constants;
 import java.util.List;
 
 import com.pathplanner.lib.commands.FollowPathHolonomic;
+import com.pathplanner.lib.commands.PathfindHolonomic;
+import com.pathplanner.lib.commands.PathfindingCommand;
 import com.pathplanner.lib.path.GoalEndState;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -62,10 +64,12 @@ public class Eyes extends SubsystemBase {
     public double tID;
     private double accelerationCompensation = 0.0; //Note this caused a ton of jitter due to inconsistent loop times
     private StructPublisher<Pose2d> posePublisher;
+    // private StructPublisher<Pose2d> trapPathCurrentPosePub;
     private StructPublisher<Translation2d> translationPublisher;
     private StructPublisher<Translation2d> trapPublisher;
     public boolean controllerRumble = false;
     public boolean closeToTrap = false;
+    public PathPlannerPath trapPath;
   
     // constuctor
     public Eyes(Swerve swerve, Shooter shooter) {
@@ -73,8 +77,10 @@ public class Eyes extends SubsystemBase {
         posePublisher = NetworkTableInstance.getDefault().getStructTopic("/Moving Goal pose", Pose2d.struct).publish();
         translationPublisher = NetworkTableInstance.getDefault().getStructTopic("/Moving Goal translation", Translation2d.struct).publish();
         trapPublisher = NetworkTableInstance.getDefault().getStructTopic("/Closest Trap", Translation2d.struct).publish();
+        // trapPathCurrentPosePub = NetworkTableInstance.getDefault().getStructTopic("/Trap Path Current Pose", Pose2d.struct).publish();
         s_Swerve = swerve;
         s_Shooter = shooter;
+        trapPath = closestTrapPath();
     }
 
  
@@ -538,7 +544,7 @@ public class Eyes extends SubsystemBase {
         
         List<Translation2d> bezierPoints = PathPlannerPath.bezierFromPoses(
 
-            new Pose2d(currentPose.getX(), currentPose.getY(), currentPose.minus(closestTrap).getRotation()), //TODO Rotation may be wrong
+            new Pose2d(currentPose.getX(), currentPose.getY(), closestTrap.minus(currentPose).getRotation()), //TODO Rotation may be wrong
             new Pose2d(closestTrap.getX(), closestTrap.getY(), closestTrap.minus(currentPose).getRotation()) //TODO Rotation may be wrong
 
         );
@@ -649,6 +655,8 @@ public class Eyes extends SubsystemBase {
         }
     }
 
+    //public Command onTheFly = new PathfindHolonomic(getClosestTrap(), null, null, null, null, null, null)
+
     @Override
     public void periodic() {
         s_Swerve.m_poseEstimator.update(s_Swerve.getGyroYaw(), s_Swerve.getModulePositions());
@@ -663,8 +671,10 @@ public class Eyes extends SubsystemBase {
                 Timer.getFPGATimestamp() - (LimelightHelpers.getLatency_Pipeline("")/1000.0) - (LimelightHelpers.getLatency_Capture("")/1000.0)
             );
         }
-        
 
+        trapPath = closestTrapPath();
+        trapPath.getPathPoses().get(0);
+        
         SmartDashboard.putNumber("Pose estimator rotations", s_Swerve.m_poseEstimator.getEstimatedPosition().getRotation().getDegrees());
         SmartDashboard.putNumber("Pose Estimator X", s_Swerve.m_poseEstimator.getEstimatedPosition().getX());
         SmartDashboard.putNumber("Pose Estimator Y", s_Swerve.m_poseEstimator.getEstimatedPosition().getY());
@@ -674,6 +684,7 @@ public class Eyes extends SubsystemBase {
 
         
         posePublisher.set(getMovingTarget());
+        // trapPathCurrentPosePub.set(trapPath.getPathPoses().get(0));
 
     }
 }

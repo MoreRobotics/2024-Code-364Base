@@ -197,7 +197,7 @@ public final class Constants {
         public static final double ampRedY = 8.0;
         public static final double ampRedR = 270;
 
-        public static final double distanceLimit = 100.0; //TODO make safe distance
+        public static final double distanceLimit = 3.0;
 
         // blue trap positions
         public static final double blueTrapLeftX = 4.3;
@@ -216,15 +216,15 @@ public final class Constants {
         // red trap positions
         public static final double redTrapLeftX = 12.3;
         public static final double redTrapLeftY = 3.0;
-        public static final double redTrapLeftR = 121.64;
+        public static final double redTrapLeftR = 121.64 + 180;
 
         public static final double redTrapRightX = 12.3;
         public static final double redTrapRightY = 5.0;
-        public static final double redTrapRightR = -121.64;
+        public static final double redTrapRightR = -121.64 + 180;
 
         public static final double redTrapCenterX = 10.4;
         public static final double redTrapCenterY = 4.1;
-        public static final double redTrapCenterR = 0.0;
+        public static final double redTrapCenterR = 0.0 + 180;
 
     }
 }

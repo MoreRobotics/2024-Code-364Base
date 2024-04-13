@@ -7,6 +7,7 @@ import java.util.function.BooleanSupplier;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.PathPlannerTrajectory;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -433,14 +434,19 @@ public class RobotContainer {
         );
 
         // generate and run path to closest trap
-        driverStart.whileTrue(new ConditionalCommand(
-            new InstantCommand(() -> s_Swerve.onTheFly(s_Eyes.closestTrapPath())),
-            new InstantCommand(), 
-            () -> s_Eyes.closeToTrap)
-                .until(() -> s_Eyes.atTrap())
-                .andThen(new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1)))) //TODO Test this, was only running on init earlier, may need to be run command
-        .onFalse(new ParallelCommandGroup(s_Swerve.getDefaultCommand(),
-        new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 0)))); //TODO let driver know we are in position to trap via rumble
+        driverStart.whileTrue(new ConditionalCommand(new InstantCommand(() -> {
+                s_Swerve.onTheFly(() -> s_Eyes.trapPath).schedule();
+                s_Eyes.limelight.setLEDMode_ForceOff("");
+                driver.setRumble(RumbleType.kBothRumble, 0);
+            }),
+            new InstantCommand(() -> {
+                s_Eyes.limelight.setLEDMode_ForceBlink("");
+                driver.setRumble(RumbleType.kBothRumble, 1);
+            }), 
+             () -> s_Eyes.closeToTrap)
+            //     .until(() -> s_Eyes.atTrap())
+            //     .andThen(new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1)))) //TODO Test this, was only running on init earlier, may need to be run command
+        ).onFalse(s_Swerve.getDefaultCommand()); //TODO let driver know we are in position to trap via rumble
 
         //Feed
         if (DriverStation.getAlliance().get() == Alliance.Blue) {

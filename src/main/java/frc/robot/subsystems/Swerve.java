@@ -17,6 +17,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
@@ -76,6 +77,7 @@ public class Swerve extends SubsystemBase {
     private StructPublisher<Pose2d> posePublisher;
     public StructArrayPublisher<SwerveModuleState> swerveKinematicsPublisher;
     public StructPublisher<Pose2d> estimatedRobotPosePublisher;
+    private StructPublisher<Pose2d> trapPathCurrentPosePub;
     public SwerveDrivePoseEstimator m_poseEstimator;
     public FieldRelativeSpeed fieldRelativeVelocity;
     public FieldRelativeSpeed lastFieldRelativeVelocity;
@@ -116,6 +118,7 @@ public class Swerve extends SubsystemBase {
         posePublisher = NetworkTableInstance.getDefault().getStructTopic("/MyPose", Pose2d.struct).publish();
         swerveKinematicsPublisher = NetworkTableInstance.getDefault().getStructArrayTopic("/SwerveModuleStates", SwerveModuleState.struct).publish();
         estimatedRobotPosePublisher = NetworkTableInstance.getDefault().getStructTopic("/EstimatedRobotPose", Pose2d.struct).publish();
+        trapPathCurrentPosePub = NetworkTableInstance.getDefault().getStructTopic("/Trap Path Current Pose", Pose2d.struct).publish();
         posePublisher = NetworkTableInstance.getDefault()
             .getStructTopic("RobotPose", Pose2d.struct).publish();
 
@@ -299,11 +302,15 @@ public class Swerve extends SubsystemBase {
         }
     }
 
-    public Command onTheFly(PathPlannerPath path) {
+    public Command onTheFly(Supplier<PathPlannerPath> pathSupplier) {
     
+        PathPlannerPath path = pathSupplier.get();
+
+        trapPathCurrentPosePub.set(path.getPathPoses().get(0));
+
         return new FollowPathHolonomic(
                 path,
-                this::getPose, // Robot pose supplier
+                this::getEstimatedPose, // Robot pose supplier
                 this::getChassisSpeed, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
                 this::setChassisSpeed, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                 new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
