@@ -1,0 +1,87 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.6513193714406413,
+        "y": 5.519297354384182
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.8714486888922583,
+        "y": 6.135939289422439
+      },
+      "isLocked": false,
+      "linkedName": "Midline Path 4 Endpoint"
+    },
+    {
+      "anchor": {
+        "x": 2.6513193714406413,
+        "y": 6.870468653218008
+      },
+      "prevControl": {
+        "x": 1.9530630626473218,
+        "y": 6.670966850705632
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.2,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.55,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Aim"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 24.304549265936778,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Midline",
+  "previewStartingState": {
+    "rotation": -0.5809166420702049,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

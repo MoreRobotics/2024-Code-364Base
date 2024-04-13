@@ -1,0 +1,113 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.4055808813372015,
+        "y": 5.537433881885308
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.5325365738450776,
+        "y": 4.748494935586363
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.9290491914317163,
+        "y": 4.830109309341426
+      },
+      "prevControl": {
+        "x": 1.9290491914317163,
+        "y": 4.830109309341426
+      },
+      "nextControl": {
+        "x": 3.929049191431712,
+        "y": 4.830109309341426
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.014749854061112,
+        "y": 4.648744034330174
+      },
+      "prevControl": {
+        "x": 4.684950271711083,
+        "y": 4.87619202215778
+      },
+      "nextControl": {
+        "x": 5.540709151593742,
+        "y": 4.286013484307671
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.33373438676702,
+        "y": 4.095579945545856
+      },
+      "prevControl": {
+        "x": 7.675738269587725,
+        "y": 4.095579945545856
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Midline Path 1 Endpoint"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.9,
+      "rotationDegrees": -26.07474124855111,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 0.95,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 2.35,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Midline",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

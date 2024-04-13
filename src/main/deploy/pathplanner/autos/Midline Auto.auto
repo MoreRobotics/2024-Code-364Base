@@ -1,0 +1,103 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.4055808813372015,
+      "y": 5.537433881885308
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoScore"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Midline Path 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Confirm Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Midline Path 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoScore"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Midline Path 3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Confirm Intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoScore"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Midline Path 4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Confirm Intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoScore"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Midline Path 5"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Confirm Intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoScore"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
