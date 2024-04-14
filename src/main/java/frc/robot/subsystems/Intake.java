@@ -85,7 +85,7 @@ public class Intake extends SubsystemBase {
     // TODO: Go over this part with Dylan and student that wrote this. Can we simplify this?
     e_intakePivotIntegrated = m_IntakePivot.getEncoder();
     e_intakePivotIntegrated.setPositionConversionFactor(360 / intakePivotMotorGearRatio);
-    e_intakePivotIntegrated.setPosition(e_intakePivot.getPosition().getValue());
+    e_intakePivotIntegrated.setPosition(e_intakePivot.getPosition().getValue() * 360);
     e_intakePivotIntegrated.setVelocityConversionFactor(360 / intakePivotMotorGearRatio);
 
     // create PID loop for intake pivot
@@ -166,7 +166,7 @@ public class Intake extends SubsystemBase {
    public void periodic() {
   
     // move the intake pivot motor to the current desired position
-    intakePivotVoltage = pid.calculate(cancoderInDegrees(), m_setPoint)/*+ feedForward) */;
+    intakePivotVoltage = pid.calculate(e_intakePivotIntegrated.getPosition(), m_setPoint)/*+ feedForward) */;
     m_IntakePivot.setVoltage(intakePivotVoltage);
 
     // log values
