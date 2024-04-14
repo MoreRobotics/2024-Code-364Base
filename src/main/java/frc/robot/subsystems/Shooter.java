@@ -32,7 +32,6 @@ public class Shooter extends SubsystemBase {
   public final double runLoaderVoltage = 12.0;
   public final double reverseLoaderVoltage = -3.0;
   public final double stopLoaderVoltage = 0.0;
-  private final int loaderCurrentLimit = 40;
 
   // shooter speeds
   public final double runShooterVoltage = 6.0;
