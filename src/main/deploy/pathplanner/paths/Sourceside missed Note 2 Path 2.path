@@ -3,32 +3,38 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.065754494498313,
-        "y": 5.823439215087209
+        "x": 8.241041962510971,
+        "y": 4.119255498297474
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.485133437645286,
-        "y": 7.663957629220123
+        "x": 3.2356109314828365,
+        "y": 4.5574741683291204
       },
       "isLocked": false,
-      "linkedName": "Four Piece Auto Path 4 Endpoint"
+      "linkedName": "Sourceside Missed Note 2 Endpoint"
     },
     {
       "anchor": {
-        "x": 2.3390624559026896,
-        "y": 6.072430910293919
+        "x": 2.057289618731077,
+        "y": 3.5933930942594987
       },
       "prevControl": {
-        "x": 3.3879277635098477,
-        "y": 6.5179666161801455
+        "x": 4.725554409590433,
+        "y": 1.6165399827834053
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.55,
+      "rotationDegrees": -0.03070135861799204,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -39,11 +45,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 15.333284793053513,
+    "rotation": -55.124671655397854,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Four Note",
+  "folder": "Source Side",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

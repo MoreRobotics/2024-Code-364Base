@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.036539916496203,
-        "y": 0.7887936060569642
+        "x": 8.279994733180452,
+        "y": 0.7693172207222235
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.075492687165683,
-        "y": 0.7887936060569642
+        "x": 8.318947503849932,
+        "y": 0.7693172207222235
       },
       "isLocked": false,
       "linkedName": "Loadside Auto Path 1 Endpoint"
@@ -21,25 +21,31 @@
       },
       "prevControl": {
         "x": 1.5509036000278411,
-        "y": 1.3730851660991583
+        "y": 1.3730851660991585
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Loadside Auto Path 2 Endpoint"
+      "linkedName": "Sourceside Auto Path 2 Endpoint"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.2,
+      "rotationDegrees": -29.89890183861451,
+      "rotateFast": true
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.75,
-    "maxAcceleration": 4.0,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -30.52970589993407,
+    "rotation": -43.451842301022026,
     "rotateFast": false
   },
   "reversed": false,

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.065754494498313,
-        "y": 5.823439215087209
+        "x": 8.15,
+        "y": 7.325500083098932
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.485133437645286,
-        "y": 7.663957629220123
+        "x": 6.361570777708579,
+        "y": 7.225738959188476
       },
       "isLocked": false,
-      "linkedName": "Four Piece Auto Path 4 Endpoint"
+      "linkedName": "Ampside Auto path 3 Endpoint"
     },
     {
       "anchor": {
-        "x": 2.3390624559026896,
-        "y": 6.072430910293919
+        "x": 2.85582141745541,
+        "y": 7.001760527838968
       },
       "prevControl": {
-        "x": 3.3879277635098477,
-        "y": 6.5179666161801455
+        "x": 5.611729942321095,
+        "y": 7.177047995851627
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Ampside Auto Path 4 Endpoint"
     }
   ],
   "rotationTargets": [],
@@ -39,11 +39,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 15.333284793053513,
+    "rotation": 24.1791071466892,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Four Note",
+  "folder": "Amp Side",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

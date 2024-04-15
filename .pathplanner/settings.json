@@ -4,9 +4,10 @@
   "holonomicMode": true,
   "pathFolders": [
     "Amp Side",
+    "Midline",
     "Four Note",
-    "Two Note",
-    "Source Side"
+    "Source Side",
+    "Two Note"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,

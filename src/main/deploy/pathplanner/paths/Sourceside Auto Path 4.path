@@ -3,43 +3,49 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.163136421167144,
-        "y": 2.395595396177869
+        "x": 8.241041962510971,
+        "y": 2.4440782784662045
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.721797688395219,
-        "y": 1.5161824972439915
+        "x": 6.517381860386496,
+        "y": 0.0095301116237263
       },
       "isLocked": false,
       "linkedName": "Sourceside Auto path 3 Endpoint"
     },
     {
       "anchor": {
-        "x": 2.3576264436479493,
-        "y": 3.909726337971194
+        "x": 1.385354324682553,
+        "y": 4.52825959032701
       },
       "prevControl": {
-        "x": 2.4597283762468765,
-        "y": 2.4246073183504393
+        "x": 1.1029467373288258,
+        "y": 1.4217761294360076
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Sourceside Auto Path 4 Endpoint"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.05,
+      "rotationDegrees": -39.370000000000005,
+      "rotateFast": true
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 5.75,
-    "maxAcceleration": 4.0,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -26.56505117707797,
+    "rotation": -45.0,
     "rotateFast": false
   },
   "reversed": false,

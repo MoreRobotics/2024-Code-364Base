@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.54,
-        "y": 7.03
+        "x": 2.63367409925703,
+        "y": 6.876162812154685
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9581156423368469,
-        "y": 6.9328152351026535
+        "x": 2.0517897415938773,
+        "y": 6.778978047257338
       },
       "isLocked": false,
       "linkedName": "Ampside Auto Path 1 Endpoint"
     },
     {
       "anchor": {
-        "x": 1.69,
-        "y": 6.86
+        "x": 1.9306931140552677,
+        "y": 6.8946404084978985
       },
       "prevControl": {
-        "x": 1.6548674903626555,
-        "y": 6.824867490362656
+        "x": 1.8955606044179232,
+        "y": 6.859507898860554
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,7 +39,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 29.744881296942317,
+    "rotation": 26.56505117707805,
     "rotateFast": false
   },
   "reversed": false,

@@ -20,15 +20,17 @@ public class PrepareShot extends Command {
 
     // local variables
     boolean shotReady = false;
+    boolean onMove = false;
 
 
 
     // constructor
-    public PrepareShot(ShooterPivot s_ShooterPivot, Shooter s_Shooter, Eyes s_Eyes) {
+    public PrepareShot(ShooterPivot s_ShooterPivot, Shooter s_Shooter, Eyes s_Eyes, boolean onMove) {
 
         this.s_ShooterPivot = s_ShooterPivot;
         this.s_Shooter = s_Shooter;
         this.s_Eyes = s_Eyes;
+        this.onMove = onMove;
 
         addRequirements(s_ShooterPivot, s_Shooter, s_Eyes);
 
@@ -37,7 +39,7 @@ public class PrepareShot extends Command {
 
     @Override
     public void execute() {
-        if (s_ShooterPivot.atPosition() == true && s_Eyes.swerveAtPosition() == true && s_Shooter.isUpToSpeed() == true) {
+        if (s_ShooterPivot.atPosition() == true && s_Eyes.swerveAtPosition(onMove) == true && s_Shooter.isUpToSpeed() == true) {
             shotReady = true;
         } else {
             shotReady = false; 
