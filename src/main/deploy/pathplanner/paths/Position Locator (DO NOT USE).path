@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.065754494498313,
-        "y": 5.823439215087209
+        "x": 4.1,
+        "y": 2.8
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.485133437645286,
-        "y": 7.663957629220123
+        "x": 5.100000000000005,
+        "y": 2.8
       },
       "isLocked": false,
-      "linkedName": "Four Piece Auto Path 4 Endpoint"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.3390624559026896,
-        "y": 6.072430910293919
+        "x": 6.655631889462832,
+        "y": 7.0
       },
       "prevControl": {
-        "x": 3.3879277635098477,
-        "y": 6.5179666161801455
+        "x": 5.655631889462832,
+        "y": 7.0
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,21 +32,21 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.75,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 15.333284793053513,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Four Note",
+  "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 0.0,
     "velocity": 0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

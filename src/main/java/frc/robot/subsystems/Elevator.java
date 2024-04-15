@@ -72,6 +72,7 @@ public class Elevator extends SubsystemBase {
   private double elevatorD = 0.0;
 
   private double voltage = 0.0;
+  public boolean isClimbed = true;
  
 
   /* Constructor
@@ -199,6 +200,19 @@ public class Elevator extends SubsystemBase {
 
         }
 
+        public boolean atPosition(double setPosition) {
+
+        double error = Math.abs(e_Elevator.getPosition() - setPosition);
+
+        if (Constants.ELEVATOR_TOLERANCE >= error) {
+            return true;
+
+        } else {
+            return false;
+        }
+
+        }
+
   /* The below method is public, which means that it can be 
    * accessed outside of this class. It also takes in a 
    * single double value as a parameter. It then takes that 
@@ -222,6 +236,11 @@ if (m_elevator1.getEncoder().getPosition() == shootingPosition){
   down();
 }
 }
+
+public void isClimbed(boolean climbState) {
+  isClimbed = climbState;
+}
+
 
 
 
@@ -272,6 +291,10 @@ private double getPosition() {
 
       public Command ElevatorAtPosition(){
           return Commands.waitUntil(() -> atPosition());
+  }
+
+      public Command ElevatorAtPosition(double setPosition){
+        return Commands.waitUntil(() -> atPosition(setPosition));
   }
          
 }

@@ -26,6 +26,7 @@ public class Shooter extends SubsystemBase {
   private final int rightShooterMotorID = 14;
   private final int loaderMotorID = 16;
   private final int breakBeamID = 0;
+  
 
   // loader speeds
   public final double runLoaderVoltage = 12.0;
@@ -40,6 +41,7 @@ public class Shooter extends SubsystemBase {
 
   public final double shotSpeedRPS = 90;
   public final double shooterSpinReduction = 1.0;
+  private final int currentLimit = 80;
 
 
   // left shooter motor PID
@@ -59,8 +61,8 @@ public class Shooter extends SubsystemBase {
   private final double rShooterMotorVGains = 0.12;
 
   // WPILib class objects
-  private TalonFX m_leftShooter;
-  private TalonFX m_rightShooter;
+  public TalonFX m_leftShooter;
+  public TalonFX m_rightShooter;
   private TalonFX m_loader;
 
   private Slot0Configs slotConfigsR;
@@ -72,7 +74,9 @@ public class Shooter extends SubsystemBase {
   public DigitalInput breakBeam;
   
   private TalonFXConfigurator configF;
-  private double m_setSpeed = 0.0;
+  public double m_setSpeed = 0.0;
+
+  public boolean gotNote = false;
 
   // constructor
   public Shooter() {
@@ -154,6 +158,11 @@ public class Shooter extends SubsystemBase {
    */
   public boolean getBreakBeamOutput() {
     return breakBeam.get();
+
+  }
+
+  public void checkNote() {
+    gotNote = !getBreakBeamOutput();
   }
 
   public Trigger getBreakBeamTrigger() {
@@ -177,9 +186,19 @@ public class Shooter extends SubsystemBase {
     slotConfigsL.kP = SmartDashboard.getNumber("LShooter kP", 0);
     slotConfigsL.kV = SmartDashboard.getNumber("LShooter kV", 0);
 
+
+
     // set configurations to motors
     m_rightShooter.getConfigurator().apply(slotConfigsR);
     m_leftShooter.getConfigurator().apply(slotConfigsL);
+
+    m_rightShooter.getConfigurator().apply(new CurrentLimitsConfigs()
+    .withSupplyCurrentLimitEnable(true)
+    .withSupplyCurrentLimit(currentLimit));
+
+    m_leftShooter.getConfigurator().apply(new CurrentLimitsConfigs()
+    .withSupplyCurrentLimitEnable(true)
+    .withSupplyCurrentLimit(currentLimit));
   }
 
   /*

@@ -14,7 +14,10 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
 
@@ -27,8 +30,8 @@ public class Intake extends SubsystemBase {
 
   // positions
   // NOTE: these positions are also used in robotcontainer.
-  public final double intakeSafePosition = 41.7;
-  public final double intakeGroundPosition = -63.1;
+  public final double intakeSafePosition = 327.5;
+  public final double intakeGroundPosition = 227.9;
   public final double intakeSourcePosition = intakeSafePosition;
 
   // PID values
@@ -41,7 +44,7 @@ public class Intake extends SubsystemBase {
   private final double magnetOffSet = 0.0;
 
   // Kermit Limits
-  private final int intakeCurrentLimit = 120;
+  private final int intakeCurrentLimit = 60;
   private final int intakePivotCurrentLimit = 60;
 
   // local variables
@@ -135,6 +138,28 @@ public class Intake extends SubsystemBase {
    */
   public double cancoderInDegrees() {
     return e_intakePivot.getPosition().getValue() * 360;
+  }
+  
+  double getTargetIntakePosition() {
+    return intakeGroundPosition;
+  }
+
+
+  public boolean atPosition() {
+
+        double error = Math.abs(e_intakePivot.getPosition().getValueAsDouble() - getTargetIntakePosition());
+
+        if (5.0 >= error) {
+            return true;
+
+        } else {
+            return false;
+        }
+
+        }
+
+        public Command IntakeAtPosition(){
+          return Commands.waitUntil(() -> atPosition());
   }
 
    @Override

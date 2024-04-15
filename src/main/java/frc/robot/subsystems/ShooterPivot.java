@@ -30,7 +30,7 @@ public class ShooterPivot extends SubsystemBase {
   public final double shooterPivotStowPosition = 115.0;
   public final double shooterPivotIntakePosition = 136.75;
   public final double shooterPivotAmpPosition = 200;
-  public final double shooterPivotClimbPosition = 364.30;
+  public final double shooterPivotClimbPosition = 309;
 
   // pivot motor PID
   private final double shooterPivotPGains = 0.3; //0.5
@@ -117,6 +117,7 @@ public class ShooterPivot extends SubsystemBase {
 
     double error = Math.abs(cancoderInDegrees() - m_setPoint);
 
+    //SmartDashboard.putBoolean("at pivot position", pivotTolerance >= error);
     if (pivotTolerance >= error) {
         return true;
 

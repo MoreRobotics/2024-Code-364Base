@@ -1,0 +1,102 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.4055808813372015,
+        "y": 5.537433881885308
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.5325365738450776,
+        "y": 4.748494935586363
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.8947741881248894,
+        "y": 4.898310911687067
+      },
+      "prevControl": {
+        "x": 1.9053384691709299,
+        "y": 4.753338645173666
+      },
+      "nextControl": {
+        "x": 5.553300786316876,
+        "y": 5.287838618381864
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.367638467186781,
+        "y": 4.099779112962734
+      },
+      "prevControl": {
+        "x": 3.8732829572795318,
+        "y": 3.7826179223564056
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Midline Path 1 Endpoint"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.45,
+      "rotationDegrees": -26.07474124855111,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 0.95,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 1.8,
+      "rotationDegrees": 0,
+      "rotateFast": true
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.55,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.57,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Midline",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

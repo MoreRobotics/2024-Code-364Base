@@ -50,6 +50,7 @@ public class RunIntake extends Command {
         s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotIntakePosition);
         s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage);
         
+        
     }
 
     // Called once the command ends or is interrupted.

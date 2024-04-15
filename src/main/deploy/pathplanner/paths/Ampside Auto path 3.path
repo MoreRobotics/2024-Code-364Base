@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6887664017838722,
-        "y": 6.862550215827963
+        "x": 1.9306931140552677,
+        "y": 6.8946404084978985
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.274835434121652,
-        "y": 7.576911245120637
+        "x": 7.516762146393047,
+        "y": 7.609001437790572
       },
       "isLocked": false,
       "linkedName": "Ampside Auto path 2 Endpoint"

@@ -6,12 +6,18 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.LimelightHelpers.LimelightTarget_Detector;
+import frc.lib.util.FieldRelativeAccel;
+import frc.lib.util.FieldRelativeAccel;
+import frc.lib.util.FieldRelativeSpeed;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
@@ -45,6 +51,8 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.FollowPathHolonomic;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
@@ -69,7 +77,13 @@ public class Swerve extends SubsystemBase {
     private StructPublisher<Pose2d> posePublisher;
     public StructArrayPublisher<SwerveModuleState> swerveKinematicsPublisher;
     public StructPublisher<Pose2d> estimatedRobotPosePublisher;
+    private StructPublisher<Pose2d> trapPathCurrentPosePub;
     public SwerveDrivePoseEstimator m_poseEstimator;
+    public FieldRelativeSpeed fieldRelativeVelocity;
+    public FieldRelativeSpeed lastFieldRelativeVelocity;
+    public FieldRelativeAccel fieldRelativeAccel;
+    private double time;
+    private double lastTime = 0.0;
     
 
     // constructor
@@ -78,6 +92,9 @@ public class Swerve extends SubsystemBase {
         // instantiate objects 
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
         m_field = new Field2d();
+        fieldRelativeVelocity = new FieldRelativeSpeed();
+        lastFieldRelativeVelocity = new FieldRelativeSpeed();
+        fieldRelativeAccel = new FieldRelativeAccel();
 
         // set gyro
         gyro.getConfigurator().apply(new Pigeon2Configuration());
@@ -101,6 +118,7 @@ public class Swerve extends SubsystemBase {
         posePublisher = NetworkTableInstance.getDefault().getStructTopic("/MyPose", Pose2d.struct).publish();
         swerveKinematicsPublisher = NetworkTableInstance.getDefault().getStructArrayTopic("/SwerveModuleStates", SwerveModuleState.struct).publish();
         estimatedRobotPosePublisher = NetworkTableInstance.getDefault().getStructTopic("/EstimatedRobotPose", Pose2d.struct).publish();
+        trapPathCurrentPosePub = NetworkTableInstance.getDefault().getStructTopic("/Trap Path Current Pose", Pose2d.struct).publish();
         posePublisher = NetworkTableInstance.getDefault()
             .getStructTopic("RobotPose", Pose2d.struct).publish();
 
@@ -284,12 +302,67 @@ public class Swerve extends SubsystemBase {
         }
     }
 
+    public Command onTheFly(Supplier<PathPlannerPath> pathSupplier) {
+    
+        PathPlannerPath path = pathSupplier.get();
+
+        trapPathCurrentPosePub.set(path.getPathPoses().get(0));
+
+        return new FollowPathHolonomic(
+                path,
+                this::getEstimatedPose, // Robot pose supplier
+                this::getChassisSpeed, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+                this::setChassisSpeed, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+                new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
+                        new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                        new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+                        Constants.Swerve.maxSpeed, // Max module speed, in m/s
+                        0.4, // Drive base radius in meters. Distance from robot center to furthest module.
+                        new ReplanningConfig() // Default path replanning config. See the API for the options here
+                ),
+                () -> {
+                  // Boolean supplier that controls when the path will be mirrored for the red alliance
+                  // This will flip the path being followed to the red side of the field.
+                  // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+    
+                  var alliance = DriverStation.getAlliance();
+                  if (alliance.isPresent()) {
+                    return alliance.get() == DriverStation.Alliance.Red;
+                  }
+                  return false;
+                },
+                this // Reference to this subsystem to set requirements
+        );
+      }
 
 
+    
+
+    // Since AutoBuilder is configured, we can use it to build pathfinding commands
+    Command pathfindingCommand(Pose2d targetPose) {
+        // Create the constraints to use while pathfinding
+        PathConstraints constraints = new PathConstraints(
+        3.0, 4.0,
+        Units.degreesToRadians(540), Units.degreesToRadians(720));
+        
+        return AutoBuilder.pathfindToPose(
+        targetPose,
+        constraints,
+        0.0, // Goal end velocity in meters/sec
+        0.0 // Rotation delay distance in meters. This is how far the robot should travel before attempting to rotate.
+        );
+    }
 
     @Override
     public void periodic(){
         swerveOdometry.update(getGyroYaw(), getModulePositions());
+
+        time = Timer.getFPGATimestamp();
+        fieldRelativeVelocity = new FieldRelativeSpeed(getChassisSpeed(), getGyroYaw());
+        fieldRelativeAccel = new FieldRelativeAccel(fieldRelativeVelocity, lastFieldRelativeVelocity, time-lastTime); //time was 0.02 for standard loop time attempting to calculate it to increase accuracy.  May crash with /0 error if startup is too quick
+        lastFieldRelativeVelocity = fieldRelativeVelocity;
+        lastTime = time;
+    
 
         SmartDashboard.putNumber("ChassisSpeedX", getChassisSpeed().vxMetersPerSecond);
         SmartDashboard.putNumber("ChassisSpeedY", getChassisSpeed().vyMetersPerSecond);
