@@ -487,11 +487,13 @@ public class RobotContainer {
 
         //reach amp 
         driverLB.whileTrue(
-            new SequentialCommandGroup(
+            new ParallelCommandGroup(
                 new PrepareFeed(s_Shooter, 25),
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
-                s_Elevator.ElevatorAtPosition(Constants.ELEVATOR_SAFE_LEVEL),
-                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotAmpPosition))
+                new SequentialCommandGroup(
+                    new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
+                    s_Elevator.ElevatorAtPosition(Constants.ELEVATOR_SAFE_LEVEL),
+                    new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotAmpPosition))
+                )
             )
         ).onFalse(
                 new SequentialCommandGroup(
