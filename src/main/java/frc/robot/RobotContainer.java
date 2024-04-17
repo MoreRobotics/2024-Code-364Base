@@ -141,7 +141,8 @@ public class RobotContainer {
 
     //Default Commands 
         //Swerve Drive
-        if (DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue) {
+        if (DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue) { 
+               
             s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 

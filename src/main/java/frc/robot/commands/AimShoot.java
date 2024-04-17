@@ -25,6 +25,7 @@ import java.sql.Driver;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.math.interpolation.InterpolatingTreeMap;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -60,25 +61,30 @@ public class AimShoot extends Command {
     // positions 
 
     //Higher note shot is lower angle!!!
-    private final double subWooferDistance = 1.31; //1.21 at 930, 1.25 at comp, 1.31 at marquette
+    // private final double subWooferDistance = 1.33; //1.21 at 930, 1.25 at comp, 1.31 at marquette //1.33 at Archimedes (blue) 1.26 (red)
     private final double subWooferAngle = 115.0; //115
     private final double subWooferSpeed = 35.0; //50
     
-    private final double xSpotDistance = 2.45; //2.45 at marquette
+    private final double xSpotDistance = 2.45; //2.45 at marquette //2.45 at Archimedes (blue) 2.37
     private final double xSpotAngle = 131.0;
     private final double xSpotSpeed = 45.0;
 
-    private final double podiumDistance = 3.02; //3.17 at comp, 3.02 at marquette
+    private final double podiumDistance = 3.08; //3.17 at comp, 3.02 at marquette, 3.08 Archimedes (blue) 3.09 (red)
     private final double podiumAngle = 137;
     private final double podiumSpeed = 60.0;
 
-    private final double chainDistance = 4.33; //4.33 at marquette (NOT ACCCURATE)
+    private final double chainDistance = 4.32; //4.33 at marquette (NOT ACCCURATE) //4.32 at Archimedes (blue) 4.22 (red)
     private final double chainAngle = 145.0;
     private final double chainSpeed = 80.0;
 
     private final double wingerDistance = 5.44;
     private final double wingerAngle = 147;
     private final double wingerSpeed = 40.25;
+
+    private final double redSubWooferDistance = 1.26;
+    private final double redXSpotDistance = 2.37;
+
+    
 
 
  
