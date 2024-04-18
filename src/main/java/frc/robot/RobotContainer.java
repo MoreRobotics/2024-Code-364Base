@@ -503,6 +503,7 @@ public class RobotContainer {
                     s_ShooterPivot.ShooterPivotAtPosition(),
                 new InstantCommand(() -> s_Elevator.SetElevatorPosition(0.0)),
                     s_Elevator.ElevatorAtPosition(0.0),
+                new WaitCommand(0.5),
                 new InstantCommand(() -> s_Elevator.resetEncoder())
                 )
         );
@@ -531,6 +532,7 @@ public class RobotContainer {
                             s_ShooterPivot.ShooterPivotAtPosition(),
                             new InstantCommand(() -> s_Elevator.SetElevatorPosition(0)),
                             s_Elevator.ElevatorAtPosition(0.0),
+                            new WaitCommand(0.5),
                             new InstantCommand(() -> s_Elevator.resetEncoder())
                         )
                     )
