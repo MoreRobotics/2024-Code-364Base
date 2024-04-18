@@ -507,7 +507,34 @@ public class RobotContainer {
                 )
         );
 
-        
+        //source intake
+                    operatorY.whileTrue(
+                    new SequentialCommandGroup(
+                        new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
+                        new InstantCommand(() -> s_Elevator.SetElevatorPosition(8.85)),
+                        s_Elevator.ElevatorAtPosition(),
+                        
+                        new ParallelCommandGroup(
+                            new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(325)),
+                            new RunLoader(s_Shooter).until(() -> !s_Shooter.getBreakBeamOutput())
+                    .andThen(new ParallelCommandGroup(
+                        new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1))
+                    )))) 
+                        
+                ).onFalse(
+                    new ParallelCommandGroup(
+                        new ParallelCommandGroup(
+                            new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 0))
+                        ),
+                        new SequentialCommandGroup(
+                            new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+                            s_ShooterPivot.ShooterPivotAtPosition(),
+                            new InstantCommand(() -> s_Elevator.SetElevatorPosition(0)),
+                            s_Elevator.ElevatorAtPosition(0.0),
+                            new InstantCommand(() -> s_Elevator.resetEncoder())
+                        )
+                    )
+                );
     
         operatorRightTrigger.onTrue(
              new ParallelCommandGroup(
