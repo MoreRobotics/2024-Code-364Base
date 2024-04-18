@@ -561,7 +561,6 @@ public class RobotContainer {
         // prepare trap
         operatorX.whileTrue(new Shooting(s_ShooterPivot, s_Shooter, 45.0, s_ShooterPivot.shooterPivotStowPosition));
         
-        operatorLB.onTrue(new InstantCommand(() -> s_Elevator.resetEncoder()));
 
     }
 
