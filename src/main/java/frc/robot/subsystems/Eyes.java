@@ -356,7 +356,8 @@ public class Eyes extends SubsystemBase {
         double robotAccelX  = s_Swerve.fieldRelativeAccel.ax;
         double robotAccelY = s_Swerve.fieldRelativeAccel.ay;
 
-        double velocityCompensation = 2.0;
+        double xVelocityCompensation = 1.0;
+        double yVelocityCompensation = 1.5;
 
         for(int i=0;i<5;i++){
 
@@ -364,11 +365,11 @@ public class Eyes extends SubsystemBase {
             double virtualGoalY;
 
             if(DriverStation.getAlliance().get() == Alliance.Blue) {
-                virtualGoalX = getTargetPose().getX() - shotTime * ((robotVelX * velocityCompensation) + robotAccelX * accelerationCompensation); 
-                virtualGoalY = getTargetPose().getY() - shotTime * ((robotVelY * velocityCompensation) + robotAccelY * accelerationCompensation); 
+                virtualGoalX = getTargetPose().getX() - shotTime * ((robotVelX * xVelocityCompensation) + robotAccelX * accelerationCompensation); 
+                virtualGoalY = getTargetPose().getY() - shotTime * ((robotVelY * yVelocityCompensation) + robotAccelY * accelerationCompensation); 
             } else {
-                virtualGoalX = getTargetPose().getX() + shotTime * ((robotVelX * velocityCompensation) + robotAccelX * accelerationCompensation); 
-                virtualGoalY = getTargetPose().getY() + shotTime * ((robotVelY * velocityCompensation) + robotAccelY * accelerationCompensation); 
+                virtualGoalX = getTargetPose().getX() + shotTime * ((robotVelX * xVelocityCompensation) + robotAccelX * accelerationCompensation); 
+                virtualGoalY = getTargetPose().getY() + shotTime * ((robotVelY * yVelocityCompensation) + robotAccelY * accelerationCompensation); 
             }
 
             Translation2d testGoalLocation = new Translation2d(virtualGoalX, virtualGoalY);
