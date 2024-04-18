@@ -242,7 +242,9 @@ public void isClimbed(boolean climbState) {
 }
 
 
-
+public void resetEncoder() {
+  e_Elevator.setPosition(0.0);
+}
 
 
   /* The below method is included in every Subsystem. You can

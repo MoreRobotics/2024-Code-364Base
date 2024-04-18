@@ -19,7 +19,7 @@ public final class Constants {
     public static final double ELEVATOR_GEAR_RATIO = 20.0;
     public static final double ELEVATOR_ROTATIONS_TO_IN = (1.0 / ELEVATOR_GEAR_RATIO) * ELEVATOR_SPROCKET_DIAMETER * Math.PI * 2.0;
     public static final double ELEVATOR_TOLERANCE = 1.0;
-    public static final double ELEVATOR_HIGH_LEVEL = 16.0;
+    public static final double ELEVATOR_HIGH_LEVEL = 16.5;
     public static final double ELEVATOR_SAFE_LEVEL = 7.0;
 
 
