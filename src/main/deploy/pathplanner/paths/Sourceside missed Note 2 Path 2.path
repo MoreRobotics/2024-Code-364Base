@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.241041962510971,
-        "y": 4.119255498297474
+        "x": 8.611093283871028,
+        "y": 4.099779112962734
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.2356109314828365,
-        "y": 4.5574741683291204
+        "x": 3.6056622528428934,
+        "y": 4.53799778299438
       },
       "isLocked": false,
       "linkedName": "Sourceside Missed Note 2 Endpoint"

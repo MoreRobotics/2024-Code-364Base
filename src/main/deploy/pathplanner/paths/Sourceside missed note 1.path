@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.293644849397962,
-        "y": 1.567016695286953
+        "x": 6.5660728237233466,
+        "y": 0.8764373400632928
       },
       "isLocked": false,
       "linkedName": "Loadside Auto Path 1 Endpoint"
     },
     {
       "anchor": {
-        "x": 8.241041962510971,
-        "y": 2.4440782784662045
+        "x": 8.611093283871028,
+        "y": 2.4929773228466994
       },
       "prevControl": {
-        "x": 8.25856238607064,
-        "y": 1.9351536710761752
+        "x": 6.595287401725456,
+        "y": 2.4150717815077387
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,8 +30,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.0,
-      "rotationDegrees": 90.0,
+      "waypointRelativePos": 0.1,
+      "rotationDegrees": 42.74576870450775,
       "rotateFast": true
     }
   ],
@@ -63,7 +63,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 89.47604771489111,
+    "rotation": 0.020069979753500364,
     "rotateFast": false
   },
   "reversed": false,

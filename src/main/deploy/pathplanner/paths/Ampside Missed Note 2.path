@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.23517407718576,
-        "y": 6.4902557155541665
+        "x": 6.11811596102433,
+        "y": 6.359039811792554
       },
       "isLocked": false,
       "linkedName": "Ampside Auto path 3 Endpoint"
     },
     {
       "anchor": {
-        "x": 8.281950694955519,
-        "y": 5.81199475789265
+        "x": 8.50397316452996,
+        "y": 5.7844864444177295
       },
       "prevControl": {
-        "x": 8.23517407718576,
-        "y": 6.127736927838529
+        "x": 7.4522483564540085,
+        "y": 5.72605728841351
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.15,
-      "rotationDegrees": -90.0,
+      "rotationDegrees": -24.367275501529637,
       "rotateFast": true
     }
   ],
@@ -63,7 +63,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.96093859731644,
+    "rotation": -1.193489423982112,
     "rotateFast": false
   },
   "reversed": false,

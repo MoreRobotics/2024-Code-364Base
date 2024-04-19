@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.23517407718576,
-        "y": 5.063568873576495
+        "x": 6.08890138302222,
+        "y": 5.453387893727152
       },
       "isLocked": false,
       "linkedName": "Ampside Auto Path 5 Endpoint"
     },
     {
       "anchor": {
-        "x": 8.31703315828284,
-        "y": 4.128036518181299
+        "x": 8.60135509120366,
+        "y": 4.099779112962734
       },
       "prevControl": {
-        "x": 8.281950694955519,
-        "y": 4.6542734680910955
+        "x": 7.035420417324195,
+        "y": 4.139689056415759
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.2,
-      "rotationDegrees": -90.0,
+      "rotationDegrees": -27.986884617189872,
       "rotateFast": false
     }
   ],
@@ -63,7 +63,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -91.64239797493919,
+    "rotation": 0.12460295492650895,
     "rotateFast": false
   },
   "reversed": false,
