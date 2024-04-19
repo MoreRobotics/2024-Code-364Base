@@ -108,7 +108,7 @@ public class ShooterPivot extends SubsystemBase {
    * returns:
    * cancoder degrees
    */
-  private double cancoderInDegrees() {
+  public double cancoderInDegrees() {
     return e_ShooterPivot.getPosition().getValue() * 360;
   }
 

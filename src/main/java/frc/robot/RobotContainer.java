@@ -122,11 +122,11 @@ public class RobotContainer {
     
     
     /* Subsystems */
-    private final ShooterPivot s_ShooterPivot = new ShooterPivot();
+    public final ShooterPivot s_ShooterPivot = new ShooterPivot();
     private final Swerve s_Swerve = new Swerve();
     private final Elevator s_Elevator = new Elevator();
     private final Intake s_Intake = new Intake();
-    private final Shooter s_Shooter = new Shooter();
+    public final Shooter s_Shooter = new Shooter();
     private final Eyes s_Eyes = new Eyes(s_Swerve, s_Shooter);
     private final Blower s_Blower = new Blower();
 
@@ -562,6 +562,8 @@ public class RobotContainer {
         operatorA.whileTrue(new PrepareFeed(s_Shooter, 65.0));
         // prepare trap
         operatorX.whileTrue(new Shooting(s_ShooterPivot, s_Shooter, 45.0, s_ShooterPivot.shooterPivotStowPosition));
+        //tuning shots
+        //operatorB.whileTrue(new ManualShooting(s_Shooter, s_ShooterPivot));
         
 
     }
