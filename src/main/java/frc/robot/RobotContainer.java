@@ -192,7 +192,19 @@ public class RobotContainer {
 
         Command AimThenShootAuto = new ParallelRaceGroup(
             
-            new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, true, false),
+            new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, false).alongWith(
+                new TeleopSwerve(
+                    s_Swerve, 
+                    () -> 0, 
+                    () -> 0, 
+                    () -> 0,
+                    () -> false,
+                    () -> s_Eyes.getTargetRotation(),
+                    () -> true,
+                    rotationSpeed,
+                    true
+                )
+            ),
             
             new SequentialCommandGroup(
                 new WaitCommand(2.0).until(() -> prepareShot()),
