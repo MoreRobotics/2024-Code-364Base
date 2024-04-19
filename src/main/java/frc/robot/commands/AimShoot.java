@@ -60,11 +60,11 @@ public class AimShoot extends Command {
     // positions 
 
     //Higher note shot is lower angle!!!
-    private final double subWooferDistance = 1.33; //1.21 at 930, 1.25 at comp, 1.31 at marquette //1.33 at Archimedes (blue) 1.26 (red)
+    private final double subWooferDistance = 1.38; //(1.33 real field) 1.38 at practice field 1.21 at 930, 1.25 at comp, 1.31 at marquette //1.33 at Archimedes (blue) 1.26 (red)
     private final double subWooferAngle = 115.5; //115
     private final double subWooferSpeed = 35.0; //50
     
-    private final double xSpotDistance = 2.45; //2.45 at marquette //2.45 at Archimedes (blue) 2.37
+    private final double xSpotDistance = 2.57; //2.57 at practice field 2.45 at marquette //2.45 at Archimedes (blue) 2.37
     private final double xSpotAngle = 131.0; //132
     private final double xSpotSpeed = 45.0;
 
@@ -80,6 +80,9 @@ public class AimShoot extends Command {
     private final double wingerAngle = 147; //147
     private final double wingerSpeed = 40.25;
 
+    //private final double midlineAutoShot3distance = 2.22;
+    //private final double midlineAutoShot3Angle = 125;
+    //private final double midlineAutoShot3Speed = 42;
 
  
     private final double feedDistance = 2.4;
@@ -114,6 +117,7 @@ public class AimShoot extends Command {
         shooterAngleInterpolation.put(xSpotDistance, xSpotAngle);
         shooterAngleInterpolation.put(chainDistance, chainAngle);
         shooterAngleInterpolation.put(wingerDistance, wingerAngle);
+        //shooterAngleInterpolation.put(midlineAutoShot3distance, midlineAutoShot3Angle);
 
 
         shooterAngleInterpolationElevator.put(elevatorShotDistance, elevatorShotAngle);
@@ -125,6 +129,7 @@ public class AimShoot extends Command {
         shooterSpeedInterpolation.put(xSpotDistance, xSpotSpeed);
         shooterSpeedInterpolation.put(wingerDistance, wingerSpeed);
         shooterSpeedInterpolation.put(subWooferDistance, subWooferSpeed);
+        //shooterSpeedInterpolation.put(midlineAutoShot3distance, midlineAutoShot3Speed);
 
     }
 
