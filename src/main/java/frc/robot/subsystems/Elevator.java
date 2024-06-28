@@ -62,7 +62,7 @@ public class Elevator extends SubsystemBase {
   public double targetElevatorPosition = 0;
 
   private double heightlimit = 16;
-  public double elevatorspeed = 0.1;
+  public double elevatorspeed = 0.1; 
   public double restingposition = 0.0;
   public double climbingPosition = -2.0;
   public double shootingPosition = 12.0;
