@@ -402,7 +402,7 @@ public class RobotContainer {
         
 
         //Climbing
-        driverRB.onTrue(new ConditionalCommand(
+        driverDpadLeft.onTrue(new ConditionalCommand(//driverRB
             //climb pull up
             new ParallelCommandGroup(
                 new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),

@@ -25,7 +25,7 @@ public class Shooter extends SubsystemBase {
   private final int leftShooterMotorID = 13;
   private final int rightShooterMotorID = 14;
   private final int loaderMotorID = 16;
-  private final int breakBeamID = 0;
+  private final int breakBeamID = 2;//0
   
 
   // loader speeds

@@ -31,7 +31,7 @@ public class Intake extends SubsystemBase {
   // positions
   // NOTE: these positions are also used in robotcontainer.
   public final double intakeSafePosition = -38;
-  public final double intakeGroundPosition = -142;
+  public final double intakeGroundPosition = -137; //-142
   public final double intakeSourcePosition = intakeSafePosition;
 
   // PID values
@@ -44,7 +44,7 @@ public class Intake extends SubsystemBase {
   private final double magnetOffSet = 0.0;
 
   // Kermit Limits
-  private final int intakeCurrentLimit = 60;
+  private final int intakeCurrentLimit = 80;
   private final int intakePivotCurrentLimit = 60;
 
   // local variables

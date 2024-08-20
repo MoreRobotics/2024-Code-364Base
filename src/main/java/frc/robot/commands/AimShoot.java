@@ -61,23 +61,23 @@ public class AimShoot extends Command {
 
     //Higher note shot is lower angle!!!
     private final double subWooferDistance = 1.273; //(1.33 real field) 1.38 at practice field 1.21 at 930, 1.25 at comp, 1.31 at marquette //1.33 at Archimedes (blue) 1.26 (red) // 1.38 at blue practice field //1.273 laser lights
-    private final double subWooferAngle = 115.5; //115
+    private final double subWooferAngle = -125.0; //115
     private final double subWooferSpeed = 35.0; //50
     
     private final double xSpotDistance = 2.37; //2.57 at blue practice field 2.45 at marquette //2.45 at Archimedes (blue) 2.37 (red), 2.37 laser Lights
-    private final double xSpotAngle = 131.0; //132
+    private final double xSpotAngle = -125.0; //132
     private final double xSpotSpeed = 45.0;
 
     private final double podiumDistance = 3.06; //3.17 at comp, 3.02 at marquette, 3.08 Archimedes (blue) 3.09 (red), 3.06 Laser Lights
-    private final double podiumAngle = 138; //135
+    private final double podiumAngle = 125.0; //135
     private final double podiumSpeed = 60.0;
 
     private final double chainDistance = 4.43; //4.33 at marquette (NOT ACCCURATE) //4.32 at Archimedes (blue) 4.22 (red), 4.43 Laser Lights
-    private final double chainAngle = 145.0; //145
+    private final double chainAngle = 125.0; //145
     private final double chainSpeed = 80.0;
 
     private final double wingerDistance = 5.44;
-    private final double wingerAngle = 147; //147
+    private final double wingerAngle = 125.0; //147
     private final double wingerSpeed = 40.25;
 
     //private final double midlineAutoShot3distance = 2.22;
