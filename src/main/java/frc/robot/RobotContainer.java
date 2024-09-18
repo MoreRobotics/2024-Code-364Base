@@ -519,7 +519,6 @@ public class RobotContainer {
                 new InstantCommand(() -> s_Elevator.resetEncoder())
                 )
         );
-
         //source intake
                     operatorY.whileTrue(
                     new SequentialCommandGroup(
