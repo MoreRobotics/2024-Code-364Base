@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -62,7 +63,8 @@ public class Elevator extends SubsystemBase {
 
   private double heightlimit = 16;
   public double elevatorspeed = 0.1;
-  public double restingposition = 0;
+  public double restingposition = 0.0;
+  public double climbingPosition = -2.0;
   public double shootingPosition = 12.0;
 
   private double elevatorP = 1.5; //4.0
@@ -70,6 +72,7 @@ public class Elevator extends SubsystemBase {
   private double elevatorD = 0.0;
 
   private double voltage = 0.0;
+  public boolean isClimbed = true;
  
 
   /* Constructor
@@ -165,6 +168,16 @@ public class Elevator extends SubsystemBase {
       return targetElevatorPosition;
   }
 
+  public void climb() {
+  m_elevator1.setSoftLimit(SoftLimitDirection.kReverse,(float)inchesToMotorRotations(climbingPosition));  
+  m_elevator2.setSoftLimit(SoftLimitDirection.kReverse,(float)inchesToMotorRotations(climbingPosition));
+  SetElevatorPosition(climbingPosition);
+  }
+
+  public void resetElevatorReverseSoftlimit(){
+  m_elevator1.setSoftLimit(SoftLimitDirection.kReverse,(float)inchesToMotorRotations(restingposition));  
+  m_elevator2.setSoftLimit(SoftLimitDirection.kReverse,(float)inchesToMotorRotations(restingposition));
+  }
 
     private double motorRotationsToInches(double rotations) {
         return rotations * Constants.ELEVATOR_ROTATIONS_TO_IN;
@@ -177,6 +190,19 @@ public class Elevator extends SubsystemBase {
     public boolean atPosition() {
 
         double error = Math.abs(e_Elevator.getPosition() - getTargetElevatorPosition());
+
+        if (Constants.ELEVATOR_TOLERANCE >= error) {
+            return true;
+
+        } else {
+            return false;
+        }
+
+        }
+
+        public boolean atPosition(double setPosition) {
+
+        double error = Math.abs(e_Elevator.getPosition() - setPosition);
 
         if (Constants.ELEVATOR_TOLERANCE >= error) {
             return true;
@@ -211,7 +237,14 @@ if (m_elevator1.getEncoder().getPosition() == shootingPosition){
 }
 }
 
+public void isClimbed(boolean climbState) {
+  isClimbed = climbState;
+}
 
+
+public void resetEncoder() {
+  e_Elevator.setPosition(0.0);
+}
 
 
   /* The below method is included in every Subsystem. You can
@@ -240,6 +273,10 @@ if (m_elevator1.getEncoder().getPosition() == shootingPosition){
         SmartDashboard.putNumber("Elevator Encoder Value: ", getPosition());
         SmartDashboard.putNumber("Current Elevator Position",e_Elevator.getPosition());
         SmartDashboard.putNumber("Elevator Voltage", voltage);
+        SmartDashboard.putNumber("debug/ELEVATOR TARGET POSITION", targetElevatorPosition);
+        SmartDashboard.putNumber("debug/Elevator Encoder Value: ", getPosition());
+        SmartDashboard.putNumber("debug/Current Elevator Position",e_Elevator.getPosition());
+        SmartDashboard.putNumber("debug/Elevator Voltage", voltage);
         
        // logData();
       
@@ -256,6 +293,10 @@ private double getPosition() {
 
       public Command ElevatorAtPosition(){
           return Commands.waitUntil(() -> atPosition());
+  }
+
+      public Command ElevatorAtPosition(double setPosition){
+        return Commands.waitUntil(() -> atPosition(setPosition));
   }
          
 }

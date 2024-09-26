@@ -5,39 +5,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Elevator;
 
-public class AmpElevator extends Command {
 
-  Elevator s_Elevator;
-  
-  /** Creates a new AmpScore. */
-  public AmpElevator(Elevator s_Elevator) {
+public class ManualElevator extends Command { 
+  private Elevator s_Elevator;
+  private double speed;
+
+  public ManualElevator(Elevator s_Elevator, double speed) {
+
     // Use addRequirements() here to declare subsystem dependencies.
     this.s_Elevator = s_Elevator;
-
+    this.speed = speed;
     addRequirements(s_Elevator);
-
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL);
-  }
+  public void initialize() {} 
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    s_Elevator.move(speed);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    s_Elevator.move(0.0);
+    s_Elevator.resetEncoder();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

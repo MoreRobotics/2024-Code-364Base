@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.9658667218569015,
-        "y": 0.7909763967676083
+        "x": 2.534461059432202,
+        "y": 0.2142402386821383
       },
       "isLocked": false,
-      "linkedName": "Loadside Auto Path 2 Endpoint"
+      "linkedName": "Sourceside Auto Path 2 Endpoint"
     },
     {
       "anchor": {
-        "x": 8.163136421167144,
-        "y": 2.395595396177869
+        "x": 8.241041962510971,
+        "y": 2.4440782784662045
       },
       "prevControl": {
-        "x": 6.8566562791000525,
-        "y": 1.924590227639699
+        "x": 7.24774631043924,
+        "y": 0.16534119430164596
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,16 +30,16 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.7,
-      "rotationDegrees": 23.19029156666067,
-      "rotateFast": false
+      "waypointRelativePos": 0.35,
+      "rotationDegrees": 30.707075654360423,
+      "rotateFast": true
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Intake",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",
         "data": {
@@ -57,13 +57,13 @@
   ],
   "globalConstraints": {
     "maxVelocity": 5.75,
-    "maxAcceleration": 4.0,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 26.075355583948827,
+    "rotation": 34.62415507994909,
     "rotateFast": false
   },
   "reversed": false,

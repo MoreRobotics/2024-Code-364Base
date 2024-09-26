@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7987428243044774,
-      "y": 6.67517683109546
+      "x": 1.4055808813372015,
+      "y": 5.537433881885308
     },
-    "rotation": 60.06848815949221
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Ampside Auto path 1"
+            "pathName": "Midline Path 1"
           }
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Ampside Auto path 2"
+            "pathName": "Midline Path 2"
           }
         },
         {
@@ -44,19 +44,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Ampside Auto path 5"
+            "pathName": "Midline Path 3"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Confirm Intake"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Ampside Auto Path 6"
           }
         },
         {
@@ -68,7 +62,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Ampside Auto path 3"
+            "pathName": "Midline Path 4"
           }
         },
         {
@@ -78,9 +72,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "AutoScore"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "Ampside Auto path 4"
+            "pathName": "Midline Path 5"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Confirm Intake"
           }
         },
         {

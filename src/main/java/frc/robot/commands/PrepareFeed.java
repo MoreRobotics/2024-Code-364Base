@@ -5,30 +5,36 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Eyes;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.ShooterPivot;
 
-public class AmpShooterPivotRetract extends Command {
 
-  ShooterPivot s_ShooterPivot;
-  
-  /** Creates a new AmpScore. */
-  public AmpShooterPivotRetract(ShooterPivot s_ShooterPivot) {
+public class PrepareFeed extends Command { 
+  private Shooter shooter;
+
+  private double shooterAngle;
+  private double shooterSpeed;
+
+  public PrepareFeed(Shooter shooter, double shooterSpeed) {
+
     // Use addRequirements() here to declare subsystem dependencies.
-    this.s_ShooterPivot = s_ShooterPivot;
-
-    addRequirements(s_ShooterPivot);
-
+    this.shooter = shooter;
+    this.shooterSpeed = shooterSpeed;
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition);
-  }
+  public void initialize() {} 
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    shooter.shootingMotorsSetControl(shooterSpeed, shooterSpeed);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -37,6 +43,6 @@ public class AmpShooterPivotRetract extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

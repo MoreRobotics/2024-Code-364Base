@@ -14,7 +14,10 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
 
@@ -27,8 +30,8 @@ public class Intake extends SubsystemBase {
 
   // positions
   // NOTE: these positions are also used in robotcontainer.
-  public final double intakeSafePosition = 28.0;
-  public final double intakeGroundPosition = -74.0;
+  public final double intakeSafePosition = -35;
+  public final double intakeGroundPosition = -135;
   public final double intakeSourcePosition = intakeSafePosition;
 
   // PID values
@@ -41,7 +44,7 @@ public class Intake extends SubsystemBase {
   private final double magnetOffSet = 0.0;
 
   // Kermit Limits
-  private final int intakeCurrentLimit = 120;
+  private final int intakeCurrentLimit = 60;
   private final int intakePivotCurrentLimit = 60;
 
   // local variables
@@ -82,7 +85,7 @@ public class Intake extends SubsystemBase {
     // TODO: Go over this part with Dylan and student that wrote this. Can we simplify this?
     e_intakePivotIntegrated = m_IntakePivot.getEncoder();
     e_intakePivotIntegrated.setPositionConversionFactor(360 / intakePivotMotorGearRatio);
-    e_intakePivotIntegrated.setPosition(e_intakePivot.getPosition().getValue());
+    e_intakePivotIntegrated.setPosition(e_intakePivot.getPosition().getValue() * 360);
     e_intakePivotIntegrated.setVelocityConversionFactor(360 / intakePivotMotorGearRatio);
 
     // create PID loop for intake pivot
@@ -136,12 +139,34 @@ public class Intake extends SubsystemBase {
   public double cancoderInDegrees() {
     return e_intakePivot.getPosition().getValue() * 360;
   }
+  
+  double getTargetIntakePosition() {
+    return intakeGroundPosition;
+  }
+
+
+  public boolean atPosition() {
+
+        double error = Math.abs(e_intakePivot.getPosition().getValueAsDouble() - getTargetIntakePosition());
+
+        if (5.0 >= error) {
+            return true;
+
+        } else {
+            return false;
+        }
+
+        }
+
+        public Command IntakeAtPosition(){
+          return Commands.waitUntil(() -> atPosition());
+  }
 
    @Override
    public void periodic() {
   
     // move the intake pivot motor to the current desired position
-    intakePivotVoltage = pid.calculate(cancoderInDegrees(), m_setPoint)/*+ feedForward) */;
+    intakePivotVoltage = pid.calculate(e_intakePivotIntegrated.getPosition(), m_setPoint)/*+ feedForward) */;
     m_IntakePivot.setVoltage(intakePivotVoltage);
 
     // log values
@@ -150,5 +175,10 @@ public class Intake extends SubsystemBase {
     SmartDashboard.putNumber("Intake Pivot Motor Position", e_intakePivotIntegrated.getPosition());
     SmartDashboard.putNumber("Intake setpoint", m_setPoint);
     SmartDashboard.putNumber("Intake Current", m_Intake.getOutputCurrent());
+    SmartDashboard.putNumber("debug/Intake Voltage", intakePivotVoltage);
+    SmartDashboard.putNumber("debug/Intake CANcoder", cancoderInDegrees());
+    SmartDashboard.putNumber("debug/Intake Pivot Motor Position", e_intakePivotIntegrated.getPosition());
+    SmartDashboard.putNumber("debug/Intake setpoint", m_setPoint);
+    SmartDashboard.putNumber("debug/Intake Current", m_Intake.getOutputCurrent());
    }
 }
