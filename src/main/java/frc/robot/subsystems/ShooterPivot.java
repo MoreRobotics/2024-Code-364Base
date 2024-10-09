@@ -29,7 +29,7 @@ public class ShooterPivot extends SubsystemBase {
   // positions
   public final double shooterPivotStowPosition = 55.6;//115.0
   public final double shooterPivotIntakePosition = 70.41;//136.75
-  public final double shooterPivotAmpPosition = 140.80;//192.5
+  public final double shooterPivotAmpPosition = 150.80;//192.5
   public final double shooterPivotClimbPosition = 46.0;//309
 
   // pivot motor PID
