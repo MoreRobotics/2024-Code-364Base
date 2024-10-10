@@ -65,11 +65,11 @@ public class AimShoot extends Command {
     private final double subWooferSpeed = 35.0; //50
     
     private final double xSpotDistance = 2.37; //2.57 at blue practice field 2.45 at marquette //2.45 at Archimedes (blue) 2.37 (red), 2.37 laser Lights
-    private final double xSpotAngle = 77.0; //132
+    private final double xSpotAngle = 72.0; //132
     private final double xSpotSpeed = 45.0;
 
     private final double podiumDistance = 3.06; //3.17 at comp, 3.02 at marquette, 3.08 Archimedes (blue) 3.09 (red), 3.06 Laser Lights
-    private final double podiumAngle = 80.0; //135
+    private final double podiumAngle = 78.0; //135
     private final double podiumSpeed = 60.0;
 
     private final double chainDistance = 4.43; //4.33 at marquette (NOT ACCCURATE) //4.32 at Archimedes (blue) 4.22 (red), 4.43 Laser Lights
