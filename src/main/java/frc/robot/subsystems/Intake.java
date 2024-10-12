@@ -30,8 +30,8 @@ public class Intake extends SubsystemBase {
 
   // positions
   // NOTE: these positions are also used in robotcontainer.
-  public final double intakeSafePosition = -58.32;
-  public final double intakeGroundPosition = -158.64; //-142
+  public final double intakeSafePosition = -60.20;
+  public final double intakeGroundPosition = -153.19; //-142
   public final double intakeSourcePosition = intakeSafePosition;
 
   // PID values
