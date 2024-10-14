@@ -27,10 +27,11 @@ public class ShooterPivot extends SubsystemBase {
   private final int shooterPivotCANCoderID = 15;
 
   // positions
-  public final double shooterPivotStowPosition = 55.6;//115.0
-  public final double shooterPivotIntakePosition = 70.41;//136.75
+  public final double shooterPivotStowPosition = 52.6;//115.0
+  public final double shooterPivotIntakePosition = 73.45;//136.75
   public final double shooterPivotAmpPosition = 150.80;//192.5
   public final double shooterPivotClimbPosition = 46.0;//309
+  public final double shooterPivotOuttakePosition = 80.34;
 
   // pivot motor PID
   private final double shooterPivotPGains = 0.3; //0.5

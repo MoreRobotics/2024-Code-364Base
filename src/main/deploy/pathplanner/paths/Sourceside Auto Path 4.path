@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.611093283871028,
-        "y": 2.4929773228466994
+        "x": 8.54292593519944,
+        "y": 2.463762744844589
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.887433181746553,
-        "y": 0.05842915600422116
+        "x": 6.819265833074964,
+        "y": 0.029214578002110914
       },
       "isLocked": false,
       "linkedName": "Sourceside Auto path 3 Endpoint"

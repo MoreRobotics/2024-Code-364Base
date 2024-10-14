@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.279994733180452,
-        "y": 0.7693172207222235
+        "x": 8.46502039386048,
+        "y": 0.7887936060569642
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.318947503849932,
-        "y": 0.7693172207222235
+        "x": 8.50397316452996,
+        "y": 0.7887936060569642
       },
       "isLocked": false,
       "linkedName": "Loadside Auto Path 1 Endpoint"
