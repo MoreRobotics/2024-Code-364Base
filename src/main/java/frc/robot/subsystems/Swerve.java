@@ -396,6 +396,6 @@ public class Swerve extends SubsystemBase {
 
         posePublisher.set(getPose());
         swerveKinematicsPublisher.set(getModuleStates());
-        estimatedRobotPosePublisher.set(m_poseEstimator.getEstimatedPosition());
+        estimatedRobotPosePublisher.set(getEstimatedPose());
     }
 }

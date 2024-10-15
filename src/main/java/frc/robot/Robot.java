@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.ShooterPivot;
+//import frc.robot.subsystems.ShooterPivot;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -42,8 +42,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    SmartDashboard.putNumber("Shooter Angle Input", m_robotContainer.s_ShooterPivot.cancoderInDegrees());
-    SmartDashboard.putNumber("Shooter Speed Input", 0);
+    // SmartDashboard.putNumber("Shooter Angle Input", m_robotContainer.s_ShooterPivot.cancoderInDegrees());
+    // SmartDashboard.putNumber("Shooter Speed Input", 0);
     
 
     DataLogManager.start();
@@ -51,11 +51,11 @@ public class Robot extends TimedRobot {
     PathfindingCommand.warmupCommand().schedule();
     
 
-    final UsbCamera usbCamera = CameraServer.startAutomaticCapture();
+    // final UsbCamera usbCamera = CameraServer.startAutomaticCapture();
 
-    if (isReal()) {
-      usbCamera.setVideoMode(new VideoMode(PixelFormat.kMJPEG, 160, 120, 30));
-    }
+    // if (isReal()) {
+    //   usbCamera.setVideoMode(new VideoMode(PixelFormat.kMJPEG, 160, 120, 30));
+    // }
   }
 
   /**
@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_robotContainer.rumbleControllers();
+    //m_robotContainer.rumbleControllers();
   }
 
   @Override

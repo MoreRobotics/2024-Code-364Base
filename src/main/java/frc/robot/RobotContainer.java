@@ -122,13 +122,13 @@ public class RobotContainer {
     
     
     /* Subsystems */
-    public final ShooterPivot s_ShooterPivot = new ShooterPivot();
+    //public final ShooterPivot s_ShooterPivot = new ShooterPivot();
     private final Swerve s_Swerve = new Swerve();
-    private final Elevator s_Elevator = new Elevator();
-    private final Intake s_Intake = new Intake();
-    public final Shooter s_Shooter = new Shooter();
-    private final Eyes s_Eyes = new Eyes(s_Swerve, s_Shooter);
-    private final Blower s_Blower = new Blower();
+    //private final Elevator s_Elevator = new Elevator();
+    //private final Intake s_Intake = new Intake();
+    //public final Shooter s_Shooter = new Shooter();
+    //private final Eyes s_Eyes = new Eyes(s_Swerve, s_Shooter);
+    //private final Blower s_Blower = new Blower();
 
     /* Commands */
     private final SendableChooser<Command> autoChooser;
@@ -148,7 +148,7 @@ public class RobotContainer {
                 s_Swerve, 
                 () -> -driver.getRawAxis(leftY), 
                 () -> -driver.getRawAxis(leftX), 
-                () -> driver.getRawAxis(rightX),
+                () -> -driver.getRawAxis(rightX),
                 () -> false,
                 () -> s_Swerve.getGyroYaw().getDegrees(),
                 () -> driverLeftTrigger.getAsBoolean(),
@@ -177,65 +177,65 @@ public class RobotContainer {
 
         //spin up shooter when we have a note in the indexer
         //NOTE: IF REMOVED NEED TO ADD SHOOTER SPINUP FOR AMP SCORE
-        s_Shooter.setDefaultCommand(
-            new ConditionalCommand(
-                new InstantCommand (() -> s_Shooter.setShooterVoltage(0, 0), s_Shooter), 
-                new InstantCommand(() -> s_Shooter.shootingMotorsSetControl(35.0, 35.0), s_Shooter), //s_Shooter.shootingMotorsSetControl(20, 20)
-                () -> s_Shooter.getBreakBeamOutput())
-        );
+        // s_Shooter.setDefaultCommand(
+        //     new ConditionalCommand(
+        //         new InstantCommand (() -> s_Shooter.setShooterVoltage(0, 0), s_Shooter), 
+        //         new InstantCommand(() -> s_Shooter.shootingMotorsSetControl(35.0, 35.0), s_Shooter), //s_Shooter.shootingMotorsSetControl(20, 20)
+        //         () -> s_Shooter.getBreakBeamOutput())
+        // );
 
         // Configure the button bindings
         configureButtonBindings();
 
-
+        SmartDashboard.putNumber("rotate joystick axis", driver.getRawAxis(rightX));
         //Auto Commands
 
-        Command AimThenShootAuto = new ParallelRaceGroup(
+        // Command AimThenShootAuto = new ParallelRaceGroup(
             
-            new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, false).alongWith(
-                new TeleopSwerve(
-                    s_Swerve, 
-                    () -> 0, 
-                    () -> 0, 
-                    () -> 0,
-                    () -> false,
-                    () -> s_Eyes.getTargetRotation(),
-                    () -> true,
-                    rotationSpeed,
-                    true
-                )
-            ),
+        //     new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, false).alongWith(
+        //         new TeleopSwerve(
+        //             s_Swerve, 
+        //             () -> 0, 
+        //             () -> 0, 
+        //             () -> 0,
+        //             () -> false,
+        //             () -> s_Eyes.getTargetRotation(),
+        //             () -> true,
+        //             rotationSpeed,
+        //             true
+        //         )
+        //     ),
             
-            new SequentialCommandGroup(
-                new WaitCommand(2.0).until(() -> prepareShot()),
-                new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage)), 
-                new WaitCommand(1.5)).until(() -> s_Shooter.getBreakBeamOutput())
+        //     new SequentialCommandGroup(
+        //         new WaitCommand(2.0).until(() -> prepareShot()),
+        //         new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage)), 
+        //         new WaitCommand(1.5)).until(() -> s_Shooter.getBreakBeamOutput())
                 
-                );
+        //         );
 
 
 
-        NamedCommands.registerCommand("Intake", new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes, s_Elevator)
-            .until(() -> !s_Shooter.getBreakBeamOutput()) //TODO Make rollers spin after at position/0.25s
-        );
-        NamedCommands.registerCommand("Confirm Intake", new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes, s_Elevator)
-            .until(() -> !s_Shooter.getBreakBeamOutput()) //TODO Make rollers spin after at position/0.25s
-            .withTimeout(1.25)
-        );
-        NamedCommands.registerCommand("AutoScore", AimThenShootAuto);
-        NamedCommands.registerCommand("Aim", new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, false));
-        NamedCommands.registerCommand("Fire", new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage)));
-        NamedCommands.registerCommand("Check Note", new InstantCommand(() -> s_Shooter.checkNote()));
-        NamedCommands.registerCommand("Got Note", new ConditionalCommand(
-            new WaitCommand (15),
-            new InstantCommand (),
-            () -> s_Shooter.gotNote
-        ));
-        NamedCommands.registerCommand("Not Got Note", new ConditionalCommand(
-            new InstantCommand (),
-            new WaitCommand (15),
-            () -> s_Shooter.gotNote
-        ));
+        // // NamedCommands.registerCommand("Intake", new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes, s_Elevator)
+        // //     .until(() -> !s_Shooter.getBreakBeamOutput()) //TODO Make rollers spin after at position/0.25s
+        // // );
+        // // NamedCommands.registerCommand("Confirm Intake", new RunIntake(s_Intake, s_ShooterPivot, s_Shooter, s_Eyes, s_Elevator)
+        // //     .until(() -> !s_Shooter.getBreakBeamOutput()) //TODO Make rollers spin after at position/0.25s
+        // //     .withTimeout(1.25)
+        // // );
+        // NamedCommands.registerCommand("AutoScore", AimThenShootAuto);
+        // NamedCommands.registerCommand("Aim", new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, false));
+        // NamedCommands.registerCommand("Fire", new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage)));
+        // NamedCommands.registerCommand("Check Note", new InstantCommand(() -> s_Shooter.checkNote()));
+        // NamedCommands.registerCommand("Got Note", new ConditionalCommand(
+        //     new WaitCommand (15),
+        //     new InstantCommand (),
+        //     () -> s_Shooter.gotNote
+        // ));
+        // NamedCommands.registerCommand("Not Got Note", new ConditionalCommand(
+        //     new InstantCommand (),
+        //     new WaitCommand (15),
+        //     () -> s_Shooter.gotNote
+        // ));
 
         //TODO Shoot on the Move in Auto?
         
@@ -247,11 +247,11 @@ public class RobotContainer {
         
     }    
     
-    private boolean prepareShot() {
+    // private boolean prepareShot() {
 
-        return (s_ShooterPivot.atPosition() == true && s_Shooter.isUpToSpeed() == true);
+    //     return (s_ShooterPivot.atPosition() == true && s_Shooter.isUpToSpeed() == true);
 
-    }
+    // }
 
     /**
      * Use this method to define your button->command mappings. Buttons can be created by
@@ -266,327 +266,327 @@ public class RobotContainer {
         driverY.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         // aim speaker
-        if (DriverStation.getAlliance().get() == Alliance.Blue) {
-            driverLeftTrigger.whileTrue(new TeleopSwerve(
-                    s_Swerve, 
-                    () -> -driver.getRawAxis(leftY), 
-                    () -> -driver.getRawAxis(leftX), 
-                    () -> 0, //driver.getRawAxis(rightX),
-                    () -> false,
-                    () -> s_Eyes.getMovingTargetRotation(),
-                    () -> true,
-                    rotationSpeed,
-                    true
-                ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, true, false))
+        // if (DriverStation.getAlliance().get() == Alliance.Blue) {
+        //     driverLeftTrigger.whileTrue(new TeleopSwerve(
+        //             s_Swerve, 
+        //             () -> -driver.getRawAxis(leftY), 
+        //             () -> -driver.getRawAxis(leftX), 
+        //             () -> 0, //driver.getRawAxis(rightX),
+        //             () -> false,
+        //             () -> s_Eyes.getMovingTargetRotation(),
+        //             () -> true,
+        //             rotationSpeed,
+        //             true
+        //         ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, true, false))
 
-            );
-        } else {
-            driverLeftTrigger.whileTrue(new TeleopSwerve(
-                    s_Swerve, 
-                    () -> driver.getRawAxis(leftY), 
-                    () -> driver.getRawAxis(leftX), 
-                    () -> 0,//driver.getRawAxis(rightX),
-                    () -> false,                    
-                    () -> s_Eyes.getMovingTargetRotation(),
-                    () -> true,
-                    rotationSpeed,
-                    true
-                ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false ,true, false))
+        //     );
+        // } else {
+        //     driverLeftTrigger.whileTrue(new TeleopSwerve(
+        //             s_Swerve, 
+        //             () -> driver.getRawAxis(leftY), 
+        //             () -> driver.getRawAxis(leftX), 
+        //             () -> 0,//driver.getRawAxis(rightX),
+        //             () -> false,                    
+        //             () -> s_Eyes.getMovingTargetRotation(),
+        //             () -> true,
+        //             rotationSpeed,
+        //             true
+        //         ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false ,true, false))
 
-            );
-        }
+        //     );
+        // }
         
 
         // aim speaker with elevator
-        if (DriverStation.getAlliance().get() == Alliance.Blue) {
-            driverB.whileTrue(
-                new ParallelCommandGroup(
-                    new TeleopSwerve(
-                            s_Swerve, 
-                            () -> -driver.getRawAxis(leftY), 
-                            () -> -driver.getRawAxis(leftX), 
-                            () -> driver.getRawAxis(rightX),
-                            () -> false,
-                            () -> s_Eyes.getTargetRotation(),
-                            () -> false,//driverB.getAsBoolean(),
-                            rotationSpeed,
-                            false //TODO Determine if we want auto rotation aiming
-                        ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, true, false, false)),
-                    new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL))
-                )
-            ).onFalse(
-                new ParallelCommandGroup(
-                    new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
-                    new InstantCommand(() -> s_Elevator.SetElevatorPosition(0))
-                )
-            );
-        } else {
-            driverB.whileTrue(
-                new ParallelCommandGroup(
-                    new TeleopSwerve(
-                            s_Swerve, 
-                            () -> driver.getRawAxis(leftY), 
-                            () -> driver.getRawAxis(leftX), 
-                            () -> driver.getRawAxis(rightX),
-                            () -> false,
-                            () -> s_Eyes.getTargetRotation(), 
-                            () -> false,//driverB.getAsBoolean(),
-                            rotationSpeed,
-                            false //TODO: Determine if we want auto rotation aiming
-                        ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, true, false, false)),
-                    new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL))
-                )
-            ).onFalse(
-                new ParallelCommandGroup(
-                    new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
-                    new InstantCommand(() -> s_Elevator.SetElevatorPosition(0))
-                )
-            );
-        }
+        // if (DriverStation.getAlliance().get() == Alliance.Blue) {
+        //     driverB.whileTrue(
+        //         new ParallelCommandGroup(
+        //             new TeleopSwerve(
+        //                     s_Swerve, 
+        //                     () -> -driver.getRawAxis(leftY), 
+        //                     () -> -driver.getRawAxis(leftX), 
+        //                     () -> driver.getRawAxis(rightX),
+        //                     () -> false,
+        //                     () -> s_Eyes.getTargetRotation(),
+        //                     () -> false,//driverB.getAsBoolean(),
+        //                     rotationSpeed,
+        //                     false //TODO Determine if we want auto rotation aiming
+        //                 ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, true, false, false)),
+        //             new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL))
+        //         )
+        //     ).onFalse(
+        //         new ParallelCommandGroup(
+        //             new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+        //             new InstantCommand(() -> s_Elevator.SetElevatorPosition(0))
+        //         )
+        //     );
+        // } else {
+        //     driverB.whileTrue(
+        //         new ParallelCommandGroup(
+        //             new TeleopSwerve(
+        //                     s_Swerve, 
+        //                     () -> driver.getRawAxis(leftY), 
+        //                     () -> driver.getRawAxis(leftX), 
+        //                     () -> driver.getRawAxis(rightX),
+        //                     () -> false,
+        //                     () -> s_Eyes.getTargetRotation(), 
+        //                     () -> false,//driverB.getAsBoolean(),
+        //                     rotationSpeed,
+        //                     false //TODO: Determine if we want auto rotation aiming
+        //                 ).alongWith(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, true, false, false)),
+        //             new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL))
+        //         )
+        //     ).onFalse(
+        //         new ParallelCommandGroup(
+        //             new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+        //             new InstantCommand(() -> s_Elevator.SetElevatorPosition(0))
+        //         )
+        //     );
+        // }
 
-        // shoot speaker
-        driverRightTrigger.onTrue(
-            new ParallelCommandGroup(
-                new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage))
-            )
-        ).onFalse(
-            new ParallelCommandGroup(
-                new InstantCommand(() -> s_Shooter.setLoaderVoltage(0))
-            )
-        );
+        // // shoot speaker
+        // driverRightTrigger.onTrue(
+        //     new ParallelCommandGroup(
+        //         new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage))
+        //     )
+        // ).onFalse(
+        //     new ParallelCommandGroup(
+        //         new InstantCommand(() -> s_Shooter.setLoaderVoltage(0))
+        //     )
+        // );
 
         
 
         // intake
-        driverX.whileTrue(new SequentialCommandGroup(
-            new ParallelCommandGroup(
-                new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeGroundPosition)),
-                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotIntakePosition)),
-                new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage))
-                ),
-            s_Intake.IntakeAtPosition().withTimeout(0.25), //TODO figure out if this actually is working or just time delay
-            new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.runIntakeVoltage)).repeatedly()) 
-            .until(() -> !s_Shooter.getBreakBeamOutput())
-            .andThen(new ParallelCommandGroup(
-                new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeSafePosition)),
-                new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.stopIntakeVoltage)),
-                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
-                new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.stopLoaderVoltage)),
-                new InstantCommand(() -> s_Eyes.limelight.setLEDMode_ForceBlink("")),
-                new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1))
-            )))
-            .onFalse(new ParallelCommandGroup(
-                new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeSafePosition)),
-                new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.stopIntakeVoltage)),
-                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
-                new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.stopLoaderVoltage)),
-                new InstantCommand(() -> s_Eyes.limelight.setLEDMode_ForceOff("")),
-                new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 0))));
+        // driverX.whileTrue(new SequentialCommandGroup(
+        //     new ParallelCommandGroup(
+        //         new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeGroundPosition)),
+        //         new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotIntakePosition)),
+        //         new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.runLoaderVoltage))
+        //         ),
+        //     s_Intake.IntakeAtPosition().withTimeout(0.25), //TODO figure out if this actually is working or just time delay
+        //     new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.runIntakeVoltage)).repeatedly()) 
+        //     .until(() -> !s_Shooter.getBreakBeamOutput())
+        //     .andThen(new ParallelCommandGroup(
+        //         new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeSafePosition)),
+        //         new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.stopIntakeVoltage)),
+        //         new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+        //         new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.stopLoaderVoltage)),
+        //         new InstantCommand(() -> s_Eyes.limelight.setLEDMode_ForceBlink("")),
+        //         new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1))
+        //     )))
+        //     .onFalse(new ParallelCommandGroup(
+        //         new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeSafePosition)),
+        //         new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.stopIntakeVoltage)),
+        //         new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+        //         new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.stopLoaderVoltage)),
+        //         new InstantCommand(() -> s_Eyes.limelight.setLEDMode_ForceOff("")),
+        //         new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 0))));
 
-        // outake
-        driverA.whileTrue(new SequentialCommandGroup(
-            new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeGroundPosition)),
-            new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotIntakePosition)),
-            new WaitCommand(0.25),
-            new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.reverseIntakeVoltage)),
-            new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.reverseLoaderVoltage))
-        )).onFalse(
-            new ParallelCommandGroup(
-                new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeSafePosition)),
-                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
-                new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.stopIntakeVoltage)),
-                new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.stopLoaderVoltage))
-            )
-        );
+        // // outake
+        // driverA.whileTrue(new SequentialCommandGroup(
+        //     new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeGroundPosition)),
+        //     new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotIntakePosition)),
+        //     new WaitCommand(0.25),
+        //     new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.reverseIntakeVoltage)),
+        //     new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.reverseLoaderVoltage))
+        // )).onFalse(
+        //     new ParallelCommandGroup(
+        //         new InstantCommand(() -> s_Intake.setIntakePivotPosition(s_Intake.intakeSafePosition)),
+        //         new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+        //         new InstantCommand(() -> s_Intake.setIntakeVoltage(s_Intake.stopIntakeVoltage)),
+        //         new InstantCommand(() -> s_Shooter.setLoaderVoltage(s_Shooter.stopLoaderVoltage))
+        //     )
+        // );
 
         
 
         //Climbing
-        driverDpadLeft.onTrue(new ConditionalCommand(//driverRB
-            //climb pull up
-            new ParallelCommandGroup(
-                new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition(2.0)),
-                new InstantCommand(() -> SmartDashboard.putString("ClimbCommand", "up")),
-                new InstantCommand(() -> s_Elevator.isClimbed(true))),
+        // driverDpadLeft.onTrue(new ConditionalCommand(//driverRB
+        //     //climb pull up
+        //     new ParallelCommandGroup(
+        //         new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
+        //         new InstantCommand(() -> s_Elevator.SetElevatorPosition(2.0)),
+        //         new InstantCommand(() -> SmartDashboard.putString("ClimbCommand", "up")),
+        //         new InstantCommand(() -> s_Elevator.isClimbed(true))),
 
-            //Reach for Climb             
-            new SequentialCommandGroup(
-                new InstantCommand(() -> s_Elevator.resetElevatorReverseSoftlimit()),
-                new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
-                s_Elevator.ElevatorAtPosition(Constants.ELEVATOR_SAFE_LEVEL),
-                new ParallelCommandGroup(
-                    new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotClimbPosition)),
-                    new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
-                    new InstantCommand(() -> s_Elevator.isClimbed(false))
-            )), 
-            () -> {
-                if(s_Elevator.isClimbed){
-                return false;
-            } else{
-                return true;
-            }
-        }));
-        //climb down more
-        driverDpadDown.onTrue(
-            new InstantCommand(() -> s_Elevator.SetElevatorPosition(0.0)));
+        //     //Reach for Climb             
+        //     new SequentialCommandGroup(
+        //         new InstantCommand(() -> s_Elevator.resetElevatorReverseSoftlimit()),
+        //         new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
+        //         new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
+        //         s_Elevator.ElevatorAtPosition(Constants.ELEVATOR_SAFE_LEVEL),
+        //         new ParallelCommandGroup(
+        //             new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotClimbPosition)),
+        //             new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
+        //             new InstantCommand(() -> s_Elevator.isClimbed(false))
+        //     )), 
+        //     () -> {
+        //         if(s_Elevator.isClimbed){
+        //         return false;
+        //     } else{
+        //         return true;
+        //     }
+        // }));
+        // //climb down more
+        // driverDpadDown.onTrue(
+        //     new InstantCommand(() -> s_Elevator.SetElevatorPosition(0.0)));
 
-        // abort climb
-        driverSelect.onTrue(
+        // // abort climb
+        // driverSelect.onTrue(
 
-            new SequentialCommandGroup(
-                new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
-                new InstantCommand(() -> SmartDashboard.putString("ClimbCommand", "down")),
-                s_Elevator.ElevatorAtPosition(),
-                new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
-                new InstantCommand(() -> SmartDashboard.putString("ShooterPivot", "return")),
-                s_ShooterPivot.ShooterPivotAtPosition(),
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition(0)),
-                new InstantCommand(() -> s_Elevator.isClimbed(true))
-            )
-        );
+        //     new SequentialCommandGroup(
+        //         new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
+        //         new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
+        //         new InstantCommand(() -> SmartDashboard.putString("ClimbCommand", "down")),
+        //         s_Elevator.ElevatorAtPosition(),
+        //         new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+        //         new InstantCommand(() -> SmartDashboard.putString("ShooterPivot", "return")),
+        //         s_ShooterPivot.ShooterPivotAtPosition(),
+        //         new InstantCommand(() -> s_Elevator.SetElevatorPosition(0)),
+        //         new InstantCommand(() -> s_Elevator.isClimbed(true))
+        //     )
+        // );
 
         
 
         // generate and run path to closest trap
-        driverStart.whileTrue(new ParallelCommandGroup(new ConditionalCommand(new InstantCommand(() -> {
-                s_Swerve.onTheFly(() -> s_Eyes.trapPath).schedule();
+        // driverStart.whileTrue(new ParallelCommandGroup(new ConditionalCommand(new InstantCommand(() -> {
+        //         s_Swerve.onTheFly(() -> s_Eyes.trapPath).schedule();
 
-            }),
-            new InstantCommand(),
+        //     }),
+        //     new InstantCommand(),
 
-            () -> s_Eyes.closeToTrap),
+        //     () -> s_Eyes.closeToTrap),
 
-            new Blow(s_Blower)
-            //     .until(() -> s_Eyes.atTrap())
-            //     .andThen(new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1)))) //TODO Test this, was only running on init earlier, may need to be run command
-        )
-        ).onFalse(s_Swerve.getDefaultCommand()); //TODO let driver know we are in position to trap via rumble
+        //     new Blow(s_Blower)
+        //     //     .until(() -> s_Eyes.atTrap())
+        //     //     .andThen(new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1)))) //TODO Test this, was only running on init earlier, may need to be run command
+        // )
+        // ).onFalse(s_Swerve.getDefaultCommand()); //TODO let driver know we are in position to trap via rumble
         
 
-        //Feed
-        if (DriverStation.getAlliance().get() == Alliance.Blue) {
-            driverRStick.whileTrue(new TeleopSwerve(
-                    s_Swerve, 
-                    () -> -driver.getRawAxis(leftY), 
-                    () -> -driver.getRawAxis(leftX), 
-                    () -> 0,
-                    () -> false,
-                    () -> s_Eyes.getFeedRotation(),
-                    () -> false,
-                    rotationSpeed,
-                    true
-                ).alongWith(new Shooting(s_ShooterPivot,s_Shooter, 65.0, 117.0))//new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, true))
-            ).onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
-        } else {
-            driverRStick.whileTrue(new TeleopSwerve(
-                    s_Swerve, 
-                    () -> driver.getRawAxis(leftY), 
-                    () -> driver.getRawAxis(leftX), 
-                    () -> 0,
-                    () -> false,
-                    () -> s_Eyes.getFeedRotation(),
-                    () -> false,
-                    rotationSpeed,
-                    true
-                ).alongWith(new Shooting(s_ShooterPivot,s_Shooter, 65.0, 117.0)))
-                .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition))
+        // //Feed
+        // if (DriverStation.getAlliance().get() == Alliance.Blue) {
+        //     driverRStick.whileTrue(new TeleopSwerve(
+        //             s_Swerve, 
+        //             () -> -driver.getRawAxis(leftY), 
+        //             () -> -driver.getRawAxis(leftX), 
+        //             () -> 0,
+        //             () -> false,
+        //             () -> s_Eyes.getFeedRotation(),
+        //             () -> false,
+        //             rotationSpeed,
+        //             true
+        //         ).alongWith(new Shooting(s_ShooterPivot,s_Shooter, 65.0, 117.0))//new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, false, false, true))
+        //     ).onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
+        // } else {
+        //     driverRStick.whileTrue(new TeleopSwerve(
+        //             s_Swerve, 
+        //             () -> driver.getRawAxis(leftY), 
+        //             () -> driver.getRawAxis(leftX), 
+        //             () -> 0,
+        //             () -> false,
+        //             () -> s_Eyes.getFeedRotation(),
+        //             () -> false,
+        //             rotationSpeed,
+        //             true
+        //         ).alongWith(new Shooting(s_ShooterPivot,s_Shooter, 65.0, 117.0)))
+        //         .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition))
 
 
-            );
-        }
+        //     );
+        // }
 
         //reach amp 
-        driverLB.whileTrue(
-            new ParallelCommandGroup(
-                new PrepareFeed(s_Shooter, 25),
-                new SequentialCommandGroup(
-                    new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
-                    s_Elevator.ElevatorAtPosition(Constants.ELEVATOR_SAFE_LEVEL),
-                    new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotAmpPosition))
-                )
-            )
-        ).onFalse(
-                new SequentialCommandGroup(
+        // driverLB.whileTrue(
+        //     new ParallelCommandGroup(
+        //         new PrepareFeed(s_Shooter, 25),
+        //         new SequentialCommandGroup(
+        //             new InstantCommand(() -> s_Elevator.SetElevatorPosition(Constants.ELEVATOR_HIGH_LEVEL)),
+        //             s_Elevator.ElevatorAtPosition(Constants.ELEVATOR_SAFE_LEVEL),
+        //             new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotAmpPosition))
+        //         )
+        //     )
+        // ).onFalse(
+        //         new SequentialCommandGroup(
 
-                    new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
-                    s_ShooterPivot.ShooterPivotAtPosition(),
-                new InstantCommand(() -> s_Elevator.SetElevatorPosition(0.0)),
-                    s_Elevator.ElevatorAtPosition(0.0),
-                new WaitCommand(0.5),
-                new InstantCommand(() -> s_Elevator.resetEncoder())
-                )
-        );
+        //             new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+        //             s_ShooterPivot.ShooterPivotAtPosition(),
+        //         new InstantCommand(() -> s_Elevator.SetElevatorPosition(0.0)),
+        //             s_Elevator.ElevatorAtPosition(0.0),
+        //         new WaitCommand(0.5),
+        //         new InstantCommand(() -> s_Elevator.resetEncoder())
+        //         )
+        // );
 
-        //source intake
-                    operatorY.whileTrue(
-                    new SequentialCommandGroup(
-                        new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
-                        new InstantCommand(() -> s_Elevator.SetElevatorPosition(8.85)),
-                        s_Elevator.ElevatorAtPosition(),
+        // //source intake
+        //             operatorY.whileTrue(
+        //             new SequentialCommandGroup(
+        //                 new InstantCommand(() -> s_Shooter.setShooterVoltage(0,0)),
+        //                 new InstantCommand(() -> s_Elevator.SetElevatorPosition(8.85)),
+        //                 s_Elevator.ElevatorAtPosition(),
                         
-                        new ParallelCommandGroup(
-                            new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(325)),
-                            new RunLoader(s_Shooter).until(() -> !s_Shooter.getBreakBeamOutput())
-                    .andThen(new ParallelCommandGroup(
-                        new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1))
-                    )))) 
+        //                 new ParallelCommandGroup(
+        //                     new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(325)),
+        //                     new RunLoader(s_Shooter).until(() -> !s_Shooter.getBreakBeamOutput())
+        //             .andThen(new ParallelCommandGroup(
+        //                 new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 1))
+        //             )))) 
                         
-                ).onFalse(
-                    new ParallelCommandGroup(
-                        new ParallelCommandGroup(
-                            new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 0))
-                        ),
-                        new SequentialCommandGroup(
-                            new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
-                            s_ShooterPivot.ShooterPivotAtPosition(),
-                            new InstantCommand(() -> s_Elevator.SetElevatorPosition(0)),
-                            s_Elevator.ElevatorAtPosition(0.0),
-                            new WaitCommand(0.5),
-                            new InstantCommand(() -> s_Elevator.resetEncoder())
-                        )
-                    )
-                );
+        //         ).onFalse(
+        //             new ParallelCommandGroup(
+        //                 new ParallelCommandGroup(
+        //                     new InstantCommand(() -> driver.setRumble(RumbleType.kBothRumble, 0))
+        //                 ),
+        //                 new SequentialCommandGroup(
+        //                     new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)),
+        //                     s_ShooterPivot.ShooterPivotAtPosition(),
+        //                     new InstantCommand(() -> s_Elevator.SetElevatorPosition(0)),
+        //                     s_Elevator.ElevatorAtPosition(0.0),
+        //                     new WaitCommand(0.5),
+        //                     new InstantCommand(() -> s_Elevator.resetEncoder())
+        //                 )
+        //             )
+        //         );
     
-        operatorRightTrigger.onTrue(
-             new ParallelCommandGroup(
-                 new InstantCommand(() -> s_Shooter.setLoaderVoltage(6)),
-                 new InstantCommand(() -> s_Shooter.setShooterVoltage(6, -6))
-             )
-         ).onFalse(
-             new ParallelCommandGroup(
-                 new InstantCommand(() -> s_Shooter.setLoaderVoltage(0)),
-                 new InstantCommand(() -> s_Shooter.setShooterVoltage(0, 0))
-             )
-         );
+        // operatorRightTrigger.onTrue(
+        //      new ParallelCommandGroup(
+        //          new InstantCommand(() -> s_Shooter.setLoaderVoltage(6)),
+        //          new InstantCommand(() -> s_Shooter.setShooterVoltage(6, -6))
+        //      )
+        //  ).onFalse(
+        //      new ParallelCommandGroup(
+        //          new InstantCommand(() -> s_Shooter.setLoaderVoltage(0)),
+        //          new InstantCommand(() -> s_Shooter.setShooterVoltage(0, 0))
+        //      )
+        //  );
         
 
         // dummy shoot commands
-        operatorDpadDown.whileTrue(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 1.25))
-            .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
-        operatorDpadLeft.whileTrue(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 2.4))
-            .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
-        operatorDpadUp.whileTrue(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 3.17))
-            .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
-        //prepare feed
-        operatorA.whileTrue(new PrepareFeed(s_Shooter, 65.0));
-        // prepare trap
-        operatorX.whileTrue(new Shooting(s_ShooterPivot, s_Shooter, 45.0, s_ShooterPivot.shooterPivotStowPosition));
-        //tuning shots
+        // operatorDpadDown.whileTrue(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 1.25))
+        //     .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
+        // operatorDpadLeft.whileTrue(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 2.4))
+        //     .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
+        // operatorDpadUp.whileTrue(new AimShoot(s_Eyes, s_ShooterPivot, s_Shooter, 3.17))
+        //     .onFalse(new InstantCommand(() -> s_ShooterPivot.moveShooterPivot(s_ShooterPivot.shooterPivotStowPosition)));
+        // //prepare feed
+        // operatorA.whileTrue(new PrepareFeed(s_Shooter, 65.0));
+        // // prepare trap
+        // operatorX.whileTrue(new Shooting(s_ShooterPivot, s_Shooter, 45.0, s_ShooterPivot.shooterPivotStowPosition));
+        // //tuning shots
         //operatorB.whileTrue(new ManualShooting(s_Shooter, s_ShooterPivot));
         
 
     }
 
-    public void rumbleControllers() {
-        if (s_Eyes.controllerRumble == true) {
-            driver.setRumble(RumbleType.kBothRumble, 1);
-        } else {
-            driver.setRumble(RumbleType.kBothRumble, 0);
-        }
-    }
+    // public void rumbleControllers() {
+    //     if (s_Eyes.controllerRumble == true) {
+    //         driver.setRumble(RumbleType.kBothRumble, 1);
+    //     } else {
+    //         driver.setRumble(RumbleType.kBothRumble, 0);
+    //     }
+    // }
 
 
     /**
