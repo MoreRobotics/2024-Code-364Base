@@ -148,7 +148,7 @@ public class RobotContainer {
                 s_Swerve, 
                 () -> -driver.getRawAxis(leftY), 
                 () -> -driver.getRawAxis(leftX), 
-                () -> -driver.getRawAxis(rightX),
+                () -> driver.getRawAxis(rightX),
                 () -> false,
                 () -> s_Swerve.getGyroYaw().getDegrees(),
                 () -> driverLeftTrigger.getAsBoolean(),
