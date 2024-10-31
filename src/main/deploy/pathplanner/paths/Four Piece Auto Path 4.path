@@ -1,0 +1,70 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.5052464814300928,
+        "y": 6.008464875767237
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.5052464814300928,
+        "y": 6.008464875767237
+      },
+      "isLocked": false,
+      "linkedName": "Four Piece Auto Path 3 Endpoint"
+    },
+    {
+      "anchor": {
+        "x": 8.065754494498313,
+        "y": 5.823439215087209
+      },
+      "prevControl": {
+        "x": 5.621468134988465,
+        "y": 7.508146546542204
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Four Piece Auto Path 4 Endpoint"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake",
+      "waypointRelativePos": 0.55,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.75,
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -12.528807709151511,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Four Note",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.049679650761172,
+        "y": 5.75417973265853
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.589951274514298,
+        "y": 7.062940868699321
+      },
+      "isLocked": false,
+      "linkedName": "Ampside Auto (Inside Center) "
+    },
+    {
+      "anchor": {
+        "x": 1.8543461385988187,
+        "y": 6.483042498795277
+      },
+      "prevControl": {
+        "x": 2.903211446205976,
+        "y": 6.6686823762478715
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Ampside Auto (Inside Center) 2"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 5.75,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 24.443954780416632,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

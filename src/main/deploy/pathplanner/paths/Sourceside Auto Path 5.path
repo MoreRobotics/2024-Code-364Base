@@ -1,0 +1,70 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.385354324682553,
+        "y": 4.52825959032701
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.1637730796220795,
+        "y": 0.2629312020189867
+      },
+      "isLocked": false,
+      "linkedName": "Sourceside Auto Path 4 Endpoint"
+    },
+    {
+      "anchor": {
+        "x": 8.279994733180452,
+        "y": 4.099779112962734
+      },
+      "prevControl": {
+        "x": 5.825970181003233,
+        "y": 0.7206262573853753
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.65,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.75,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 42.089162173832335,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Source Side",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}

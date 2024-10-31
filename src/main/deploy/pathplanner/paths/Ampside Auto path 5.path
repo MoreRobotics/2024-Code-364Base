@@ -1,0 +1,70 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.85582141745541,
+        "y": 7.001760527838968
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.85582141745541,
+        "y": 7.001760527838968
+      },
+      "isLocked": false,
+      "linkedName": "Ampside Auto Path 4 Endpoint"
+    },
+    {
+      "anchor": {
+        "x": 8.211827384508862,
+        "y": 5.7844864444177295
+      },
+      "prevControl": {
+        "x": 6.790051255072855,
+        "y": 6.5245890871378425
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Ampside Auto Path 5 Endpoint"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake",
+      "waypointRelativePos": 0.5,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 5.75,
+    "maxAcceleration": 4.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -17.65012421993018,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Amp Side",
+  "previewStartingState": {
+    "rotation": 31.82547431990845,
+    "velocity": 0
+  },
+  "useDefaultConstraints": false
+}
